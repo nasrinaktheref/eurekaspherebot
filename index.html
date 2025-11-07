@@ -273,6 +273,17 @@
       <h1 id="main-tagline" class="text-5xl lg:text-6xl font-bold mb-6 animate-float">Smart Study. Easy Practice. Success Guaranteed.</h1>
       <p id="hero-subtitle" class="text-xl lg:text-2xl mb-8 opacity-90">Your gateway to academic excellence through innovative learning and practice</p>
       <div class="flex flex-col sm:flex-row gap-4"><button class="btn-primary text-white px-8 py-4 rounded-lg font-semibold text-lg">Start Learning Now</button> <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all">Explore Courses</button>
+      </div><!-- YouTube Video Section -->
+      <div id="hero-youtube-section" class="mt-12 bg-white/10 backdrop-blur-sm rounded-2xl p-4 shadow-2xl hidden">
+       <div class="aspect-video rounded-xl overflow-hidden shadow-lg"><iframe id="hero-youtube-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <p id="hero-youtube-caption" class="text-white text-center mt-3 text-sm opacity-90">📚 Watch our featured video!</p>
+      </div><!-- Promotional Image (Fallback) -->
+      <div id="hero-image-section" class="mt-12 bg-white/10 backdrop-blur-sm rounded-2xl p-4 shadow-2xl"><img src="https://raw.githubusercontent.com/nasrinaktheref/abidimage/d4a154ae2f4e56d24a1efce6f3da1892b2c5f6d5/Untitled%20design.png" alt="EurekaSphere Learning Platform" class="w-full rounded-xl shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+       <div style="display: none;" class="w-full h-64 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center">
+        <p class="text-white text-xl font-semibold">EurekaSphere - Your Learning Partner</p>
+       </div>
+       <p class="text-white text-center mt-3 text-sm opacity-90">📚 Discover how EurekaSphere helps students succeed!</p>
       </div>
      </div>
      <div class="relative"><!-- Educational Excellence Illustration -->
@@ -281,6 +292,22 @@
        </svg>
       </div>
      </div>
+    </div>
+   </div>
+  </section><!-- Telegram Chat Section -->
+  <section id="telegram-login" class="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center border-2 border-blue-100">
+     <div class="mb-6">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mb-4 animate-pulse-slow">
+       <svg class="w-10 h-10 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z" />
+       </svg>
+      </div>
+     </div>
+     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Chat with EurekaSphere Bot 🤖💬</h2>
+     <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Connect with our Telegram bot for personalized learning, quizzes, and instant support!</p><!-- Chat with Bot Button --> <a href="https://t.me/eurekaspherebot" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-lg font-semibold px-8 py-4 rounded-xl shadow-lg transform transition-all hover:scale-105">
+      <svg class="w-6 h-6 mr-3" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z" />
+      </svg> Start Chatting on Telegram </a>
     </div>
    </div>
   </section><!-- About Section -->
@@ -1096,31 +1123,191 @@
         // Quiz state
         let quizData = {
             quiz1: {
-                question: '',
-                optionA: '',
-                optionB: '',
-                optionC: '',
-                optionD: '',
-                answer: ''
+                question: 'What is the chemical symbol for water?',
+                optionA: 'H2O',
+                optionB: 'CO2',
+                optionC: 'O2',
+                optionD: 'NaCl',
+                answer: 'A'
             },
             quiz2: {
-                question: '',
-                optionA: '',
-                optionB: '',
-                optionC: '',
-                optionD: '',
-                answer: ''
+                question: 'Which planet is known as the Red Planet?',
+                optionA: 'Venus',
+                optionB: 'Mars',
+                optionC: 'Jupiter',
+                optionD: 'Saturn',
+                answer: 'B'
             },
             quiz3: {
-                question: '',
-                optionA: '',
-                optionB: '',
-                optionC: '',
-                optionD: '',
-                answer: ''
+                question: 'What is the powerhouse of the cell?',
+                optionA: 'Nucleus',
+                optionB: 'Ribosome',
+                optionC: 'Mitochondria',
+                optionD: 'Chloroplast',
+                answer: 'C'
             }
         };
         let userAnswers = {};
+
+        // Exam-specific questions
+        const examQuestions = {
+            ssc: [
+                {
+                    question: 'What is the capital of Bangladesh?',
+                    optionA: 'Chittagong',
+                    optionB: 'Dhaka',
+                    optionC: 'Sylhet',
+                    optionD: 'Rajshahi',
+                    answer: 'B'
+                },
+                {
+                    question: 'Who is known as the Father of the Nation of Bangladesh?',
+                    optionA: 'Ziaur Rahman',
+                    optionB: 'Hussain Muhammad Ershad',
+                    optionC: 'Sheikh Mujibur Rahman',
+                    optionD: 'A.K. Fazlul Huq',
+                    answer: 'C'
+                },
+                {
+                    question: 'What is 15% of 200?',
+                    optionA: '25',
+                    optionB: '30',
+                    optionC: '35',
+                    optionD: '40',
+                    answer: 'B'
+                }
+            ],
+            hsc: [
+                {
+                    question: 'What is the derivative of x²?',
+                    optionA: 'x',
+                    optionB: '2x',
+                    optionC: 'x²',
+                    optionD: '2x²',
+                    answer: 'B'
+                },
+                {
+                    question: 'Which gas is most abundant in Earth\'s atmosphere?',
+                    optionA: 'Oxygen',
+                    optionB: 'Carbon Dioxide',
+                    optionC: 'Nitrogen',
+                    optionD: 'Hydrogen',
+                    answer: 'C'
+                },
+                {
+                    question: 'Who wrote "Gitanjali"?',
+                    optionA: 'Kazi Nazrul Islam',
+                    optionB: 'Rabindranath Tagore',
+                    optionC: 'Jibanananda Das',
+                    optionD: 'Michael Madhusudan Dutt',
+                    answer: 'B'
+                }
+            ],
+            admission: [
+                {
+                    question: 'If 2x + 5 = 15, what is the value of x?',
+                    optionA: '3',
+                    optionB: '4',
+                    optionC: '5',
+                    optionD: '6',
+                    answer: 'C'
+                },
+                {
+                    question: 'What is the SI unit of force?',
+                    optionA: 'Joule',
+                    optionB: 'Newton',
+                    optionC: 'Watt',
+                    optionD: 'Pascal',
+                    answer: 'B'
+                },
+                {
+                    question: 'Which organ in the human body produces insulin?',
+                    optionA: 'Liver',
+                    optionB: 'Kidney',
+                    optionC: 'Pancreas',
+                    optionD: 'Heart',
+                    answer: 'C'
+                }
+            ],
+            olympiad: [
+                {
+                    question: 'What is the square root of 144?',
+                    optionA: '10',
+                    optionB: '11',
+                    optionC: '12',
+                    optionD: '13',
+                    answer: 'C'
+                },
+                {
+                    question: 'Which element has the atomic number 1?',
+                    optionA: 'Helium',
+                    optionB: 'Hydrogen',
+                    optionC: 'Lithium',
+                    optionD: 'Carbon',
+                    answer: 'B'
+                },
+                {
+                    question: 'What is the value of π (pi) approximately?',
+                    optionA: '3.14',
+                    optionB: '2.71',
+                    optionC: '1.41',
+                    optionD: '4.20',
+                    answer: 'A'
+                }
+            ],
+            job: [
+                {
+                    question: 'What does CPU stand for?',
+                    optionA: 'Central Processing Unit',
+                    optionB: 'Computer Personal Unit',
+                    optionC: 'Central Program Utility',
+                    optionD: 'Computer Processing Utility',
+                    answer: 'A'
+                },
+                {
+                    question: 'Who is the current Prime Minister of Bangladesh?',
+                    optionA: 'Khaleda Zia',
+                    optionB: 'Sheikh Hasina',
+                    optionC: 'Hussain Muhammad Ershad',
+                    optionD: 'Begum Rokeya',
+                    answer: 'B'
+                },
+                {
+                    question: 'What is the currency of Japan?',
+                    optionA: 'Yuan',
+                    optionB: 'Won',
+                    optionC: 'Yen',
+                    optionD: 'Ringgit',
+                    answer: 'C'
+                }
+            ],
+            gk: [
+                {
+                    question: 'In which year did Bangladesh gain independence?',
+                    optionA: '1947',
+                    optionB: '1952',
+                    optionC: '1971',
+                    optionD: '1991',
+                    answer: 'C'
+                },
+                {
+                    question: 'Which is the largest ocean in the world?',
+                    optionA: 'Atlantic Ocean',
+                    optionB: 'Indian Ocean',
+                    optionC: 'Arctic Ocean',
+                    optionD: 'Pacific Ocean',
+                    answer: 'D'
+                },
+                {
+                    question: 'Who invented the telephone?',
+                    optionA: 'Thomas Edison',
+                    optionB: 'Alexander Graham Bell',
+                    optionC: 'Nikola Tesla',
+                    optionD: 'Albert Einstein',
+                    answer: 'B'
+                }
+            ]
+        };
 
         // Student data storage
         let studentData = [];
@@ -1339,22 +1526,42 @@
         }
 
         function displayYouTubeVideo() {
+            // Display in separate section
             const section = document.getElementById('youtube-section');
             const iframe = document.getElementById('youtube-iframe');
             const titleElement = document.getElementById('youtube-section-title');
+            
+            // Display in hero section
+            const heroSection = document.getElementById('hero-youtube-section');
+            const heroIframe = document.getElementById('hero-youtube-iframe');
+            const heroCaption = document.getElementById('hero-youtube-caption');
+            const heroImageSection = document.getElementById('hero-image-section');
             
             if (youtubeData.link && youtubeData.link.trim() !== '') {
                 const videoId = extractYouTubeVideoId(youtubeData.link);
                 
                 if (videoId) {
-                    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                    
+                    // Update separate section
+                    iframe.src = embedUrl;
                     titleElement.textContent = youtubeData.title || 'Featured Video';
                     section.classList.remove('hidden');
+                    
+                    // Update hero section
+                    heroIframe.src = embedUrl;
+                    heroCaption.textContent = youtubeData.title ? `📺 ${youtubeData.title}` : '📺 Watch our featured video!';
+                    heroSection.classList.remove('hidden');
+                    heroImageSection.classList.add('hidden');
                 } else {
                     section.classList.add('hidden');
+                    heroSection.classList.add('hidden');
+                    heroImageSection.classList.remove('hidden');
                 }
             } else {
                 section.classList.add('hidden');
+                heroSection.classList.add('hidden');
+                heroImageSection.classList.remove('hidden');
             }
         }
 
@@ -1624,16 +1831,142 @@
             showNotification('All content updated successfully!', 'success');
         });
 
+        // Show exam questions in modal
+        function showExamQuestions(examType) {
+            const questions = examQuestions[examType];
+            if (!questions || questions.length === 0) {
+                showNotification('No questions available for this exam yet.', 'info');
+                return;
+            }
+
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
+            modal.innerHTML = `
+                <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-gray-900">${examType.toUpperCase()} Practice Questions</h3>
+                        <button class="close-exam-modal text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-6 space-y-6" id="exam-questions-container"></div>
+                    <div class="sticky bottom-0 bg-white border-t p-6">
+                        <button class="submit-exam-btn w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-600 transition-all">
+                            Submit Answers
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Render questions
+            const container = modal.querySelector('#exam-questions-container');
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'bg-gray-50 rounded-xl p-6 border-2 border-gray-200';
+                questionDiv.innerHTML = `
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">Question ${index + 1}</h4>
+                    <p class="text-gray-700 mb-4 text-lg">${q.question}</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="exam-q${index}" value="A" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>A.</strong> ${q.optionA}</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="exam-q${index}" value="B" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>B.</strong> ${q.optionB}</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="exam-q${index}" value="C" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>C.</strong> ${q.optionC}</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="exam-q${index}" value="D" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>D.</strong> ${q.optionD}</span>
+                        </label>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+
+            // Close modal handler
+            modal.querySelector('.close-exam-modal').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+
+            // Submit handler
+            modal.querySelector('.submit-exam-btn').addEventListener('click', () => {
+                let score = 0;
+                let answered = 0;
+
+                questions.forEach((q, index) => {
+                    const selected = modal.querySelector(`input[name="exam-q${index}"]:checked`);
+                    if (selected) {
+                        answered++;
+                        if (selected.value === q.answer) {
+                            score++;
+                        }
+                    }
+                });
+
+                if (answered < questions.length) {
+                    showNotification('Please answer all questions before submitting!', 'error');
+                    return;
+                }
+
+                const percentage = (score / questions.length) * 100;
+                let message = '';
+                
+                if (percentage === 100) {
+                    message = '🌟 Perfect score! Outstanding performance!';
+                } else if (percentage >= 66) {
+                    message = '👏 Great job! You\'re doing well!';
+                } else if (percentage >= 33) {
+                    message = '💪 Good effort! Keep practicing!';
+                } else {
+                    message = '📚 Keep studying! You\'ll improve!';
+                }
+
+                // Show result
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h4 class="text-3xl font-bold text-gray-900 mb-4">Quiz Completed!</h4>
+                        <p class="text-2xl text-gray-600 mb-4">Your Score: <span class="font-bold text-blue-600">${score}/${questions.length}</span></p>
+                        <p class="text-xl text-gray-600 mb-6">${message}</p>
+                        <p class="text-lg text-gray-500">Percentage: ${percentage.toFixed(1)}%</p>
+                    </div>
+                `;
+
+                modal.querySelector('.submit-exam-btn').textContent = 'Close';
+                modal.querySelector('.submit-exam-btn').onclick = () => {
+                    document.body.removeChild(modal);
+                };
+            });
+
+            // Close on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
         // Exam Button Click Handler
         document.querySelectorAll('.exam-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const examType = this.getAttribute('data-exam');
                 const link = examLinks[examType];
                 
+                // If admin has set a link, open it; otherwise show practice questions
                 if (link && link.trim() !== '') {
                     window.open(link, '_blank', 'noopener,noreferrer');
                 } else {
-                    showNotification(`${examType.toUpperCase()} exam link not configured yet. Please contact admin.`, 'info');
+                    showExamQuestions(examType);
                 }
             });
         });
@@ -2058,22 +2391,6 @@
                 mapToEditPanelValues
             });
         }
-         <section id="telegram-login" style="text-align:center; padding:50px; background:#f0f8ff; border-radius:12px;">
-  <h2 style="font-family: 'Arial', sans-serif; color:#2c3e50;">
-    Welcome to EurekaSphere 🌍💡
-  </h2>
-  <p style="font-family: 'Arial', sans-serif; color:#34495e; margin-bottom:20px;">
-    Login with Telegram to unlock personalized learning and explore quizzes, projects, and events!
-  </p>
-  <!-- Telegram Login Widget -->
-  <script async src="https://telegram.org/js/telegram-widget.js?7"
-          data-telegram-login="eurekaspherebot"
-          data-size="large"
-          data-userpic="true"
-          data-radius="12"
-          data-auth-url="https://eurekasphere1.vercel.app/auth"
-          data-request-access="write">
-  </script>
-</section>        
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ad8289c1da0645',t:'MTc2MjUyNTYzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99adab4ad6f30645',t:'MTc2MjUyNzMwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
