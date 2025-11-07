@@ -1,0 +1,2063 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EurekaSphere - Learn. Practice. Excel.</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatUp 8s infinite linear;
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; width: 10px; height: 10px; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; width: 15px; height: 15px; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; width: 8px; height: 8px; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; width: 12px; height: 12px; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; width: 6px; height: 6px; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; width: 14px; height: 14px; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 6s; width: 9px; height: 9px; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 7s; width: 11px; height: 11px; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 8s; width: 7px; height: 7px; }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .pulse-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: pulseRing 2s infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.02);
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover:hover::before {
+            opacity: 1;
+        }
+        
+        .card-3d {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-3d::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .card-3d:hover::after {
+            left: 100%;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #10b981;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(145deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 200%;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            transform-style: preserve-3d;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px) rotateX(10deg) scale(1.05);
+            background-position: 100% 100%;
+            box-shadow: 
+                0 15px 35px rgba(102, 126, 234, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-2px) rotateX(5deg) scale(1.02);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            animation: progress 2s ease-in-out;
+        }
+        
+        @keyframes progress {
+            from { width: 0%; }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="font-sans"><!-- Admin Notification Banner -->
+  <div id="admin-notification-banner" class="bg-blue-600 text-white text-center py-2 px-4 hidden">
+   <div class="flex items-center justify-between max-w-7xl mx-auto">
+    <div class="flex-1"><span id="notification-text" class="text-sm font-medium"></span>
+    </div><button id="close-notification" class="text-white hover:text-gray-200 ml-4">
+     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+     </svg></button>
+   </div>
+  </div><!-- Navigation -->
+  <nav class="bg-white shadow-lg fixed w-full top-0 z-50" id="main-nav">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+     <div class="flex items-center space-x-3"><!-- Logo Image --> <img src="https://raw.githubusercontent.com/nasrinaktheref/abidimage/18ea1240742f52a75cdcd22721498348e85d2ae9/Untitled%20design.png" alt="EurekaSphere Logo" class="w-10 h-10 rounded-lg object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"> <!-- Fallback Logo SVG -->
+      <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center" style="display: none;">
+       <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" /> <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" />
+       </svg>
+      </div><span id="brand-name" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">EurekaSphere</span>
+     </div>
+     <div class="hidden md:flex space-x-8"><a href="#home" class="nav-link text-gray-700 hover:text-green-600 font-medium">Home</a> <a href="#about" class="nav-link text-gray-700 hover:text-green-600 font-medium">About</a> <a href="#exams" class="nav-link text-gray-700 hover:text-green-600 font-medium">Exams</a> <a href="#exam-tips" class="nav-link text-gray-700 hover:text-green-600 font-medium">Tips</a> <a href="#tests" class="nav-link text-gray-700 hover:text-green-600 font-medium">Tests</a> <a href="#resources" class="nav-link text-gray-700 hover:text-green-600 font-medium">Resources</a> <a href="#leaderboard" class="nav-link text-gray-700 hover:text-green-600 font-medium">Leaderboard</a> <a href="#contact" class="nav-link text-gray-700 hover:text-green-600 font-medium">Contact</a>
+     </div><button id="mobile-menu-btn" class="md:hidden text-gray-700">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg></button>
+    </div>
+   </div><!-- Mobile Menu -->
+   <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+    <div class="px-2 pt-2 pb-3 space-y-1"><a href="#home" class="block px-3 py-2 text-gray-700 hover:text-green-600">Home</a> <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-green-600">About</a> <a href="#exams" class="block px-3 py-2 text-gray-700 hover:text-green-600">Exams</a> <a href="#exam-tips" class="block px-3 py-2 text-gray-700 hover:text-green-600">Tips</a> <a href="#tests" class="block px-3 py-2 text-gray-700 hover:text-green-600">Tests</a> <a href="#resources" class="block px-3 py-2 text-gray-700 hover:text-green-600">Resources</a> <a href="#leaderboard" class="block px-3 py-2 text-gray-700 hover:text-green-600">Leaderboard</a> <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-green-600">Contact</a>
+    </div>
+   </div>
+  </nav><!-- Hero Section -->
+  <section id="home" class="gradient-bg min-h-screen flex items-center pt-16"><!-- Floating Particles -->
+   <div class="floating-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+   </div>
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+     <div class="text-white">
+      <h1 id="main-tagline" class="text-5xl lg:text-6xl font-bold mb-6 animate-float">Smart Study. Easy Practice. Success Guaranteed.</h1>
+      <p id="hero-subtitle" class="text-xl lg:text-2xl mb-8 opacity-90">Your gateway to academic excellence through innovative learning and practice</p>
+      <div class="flex flex-col sm:flex-row gap-4"><button class="btn-primary text-white px-8 py-4 rounded-lg font-semibold text-lg">Start Learning Now</button> <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all">Explore Courses</button>
+      </div>
+     </div>
+     <div class="relative"><!-- Educational Excellence Illustration -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 animate-float">
+       <svg class="w-full h-80" viewbox="0 0 400 300" fill="none"><!-- Main building/institution --> <rect x="150" y="120" width="100" height="120" rx="8" fill="#3b82f6" /> <rect x="160" y="130" width="80" height="100" rx="4" fill="#1e40af" /> <!-- Columns --> <rect x="165" y="140" width="8" height="80" fill="#ffffff" opacity="0.8" /> <rect x="180" y="140" width="8" height="80" fill="#ffffff" opacity="0.8" /> <rect x="195" y="140" width="8" height="80" fill="#ffffff" opacity="0.8" /> <rect x="210" y="140" width="8" height="80" fill="#ffffff" opacity="0.8" /> <rect x="225" y="140" width="8" height="80" fill="#ffffff" opacity="0.8" /> <!-- Roof/Top --> <polygon points="140,120 200,80 260,120" fill="#10b981" /> <!-- Flag --> <rect x="195" y="60" width="3" height="30" fill="#6b7280" /> <rect x="198" y="60" width="20" height="12" fill="#ef4444" /> <!-- Students around building --> <circle cx="120" cy="200" r="15" fill="#fbbf24" /> <rect x="110" y="215" width="20" height="25" rx="4" fill="#3b82f6" /> <circle cx="280" cy="200" r="15" fill="#fbbf24" /> <rect x="270" y="215" width="20" height="25" rx="4" fill="#10b981" /> <circle cx="80" cy="180" r="12" fill="#fbbf24" /> <rect x="72" y="192" width="16" height="20" rx="3" fill="#8b5cf6" /> <circle cx="320" cy="180" r="12" fill="#fbbf24" /> <rect x="312" y="192" width="16" height="20" rx="3" fill="#ef4444" /> <!-- Books and study materials --> <rect x="60" y="220" width="12" height="18" fill="#10b981" /> <rect x="75" y="215" width="12" height="23" fill="#059669" /> <rect x="90" y="218" width="12" height="20" fill="#047857" /> <rect x="320" y="220" width="12" height="18" fill="#8b5cf6" /> <rect x="335" y="215" width="12" height="23" fill="#7c3aed" /> <rect x="350" y="218" width="12" height="20" fill="#6d28d9" /> <!-- Success stars --> <polygon points="50,60 52,66 58,66 53,70 55,76 50,72 45,76 47,70 42,66 48,66" fill="#fbbf24" /> <polygon points="350,50 352,56 358,56 353,60 355,66 350,62 345,66 347,60 342,56 348,56" fill="#f59e0b" /> <polygon points="370,80 372,86 378,86 373,90 375,96 370,92 365,96 367,90 362,86 368,86" fill="#eab308" /> <!-- Knowledge rays --> <line x1="200" y1="80" x2="180" y2="40" stroke="#fbbf24" stroke-width="2" opacity="0.6" /> <line x1="200" y1="80" x2="200" y2="35" stroke="#f59e0b" stroke-width="2" opacity="0.6" /> <line x1="200" y1="80" x2="220" y2="40" stroke="#eab308" stroke-width="2" opacity="0.6" />
+       </svg>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- About Section -->
+  <section id="about" class="py-20 bg-gray-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 id="about-title" class="text-4xl font-bold text-gray-900 mb-6">About EurekaSphere</h2>
+     <p id="about-description" class="text-xl text-gray-600 max-w-3xl mx-auto">EurekaSphere is an innovative educational community that inspires students to learn smartly. We provide creative tools, question banks, and AI-powered study support for students who want to achieve success in their academic and career journeys.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+     <div class="text-center card-hover card-3d bg-white p-8 rounded-xl shadow-lg">
+      <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+       </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Smart Learning</h3>
+      <p class="text-gray-600">AI-powered personalized learning paths tailored to your strengths and weaknesses</p>
+     </div>
+     <div class="text-center card-hover card-3d bg-white p-8 rounded-xl shadow-lg">
+      <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Practice Tests</h3>
+      <p class="text-gray-600">Comprehensive mock tests and quizzes for all major competitive exams</p>
+     </div>
+     <div class="text-center card-hover card-3d bg-white p-8 rounded-xl shadow-lg">
+      <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" />
+       </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Performance Tracking</h3>
+      <p class="text-gray-600">Detailed analytics and progress tracking to monitor your improvement</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Exam Preparation Section -->
+  <section id="exams" class="py-20 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 id="exam-prep-title" class="text-4xl font-bold text-gray-900 mb-6">Exam Preparation</h2>
+     <p class="text-xl text-gray-600">Choose your exam category and start your preparation journey</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- SSC -->
+     <div class="card-hover card-3d bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200 shadow-xl">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center mr-4 shadow-lg"><span class="text-white font-bold text-lg">SSC</span>
+       </div>
+       <h3 class="text-xl font-bold text-gray-900">SSC Exams</h3>
+      </div>
+      <p class="text-gray-600 mb-6">Prepare for SSC CGL, CHSL, MTS and other staff selection commission exams</p><button class="exam-btn w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-lg" data-exam="ssc">Start Practice</button>
+     </div><!-- HSC -->
+     <div class="card-hover card-3d bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200 shadow-xl">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center mr-4 shadow-lg"><span class="text-white font-bold text-lg">HSC</span>
+       </div>
+       <h3 class="text-xl font-bold text-gray-900">HSC Exams</h3>
+      </div>
+      <p class="text-gray-600 mb-6">Complete preparation for Higher Secondary Certificate examinations</p><button class="exam-btn w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 shadow-lg" data-exam="hsc">Start Practice</button>
+     </div><!-- Admission Tests -->
+     <div class="card-hover card-3d bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200 shadow-xl">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center mr-4 shadow-lg">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-900">Admission Tests</h3>
+      </div>
+      <p class="text-gray-600 mb-6">University admission test preparation for medical, engineering and other courses</p><button class="exam-btn w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg" data-exam="admission">Start Practice</button>
+     </div><!-- Olympiad -->
+     <div class="card-hover card-3d bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-xl border border-yellow-200 shadow-xl">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-lg flex items-center justify-center mr-4 shadow-lg">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-900">Olympiad Practice</h3>
+      </div>
+      <p class="text-gray-600 mb-4">Mathematics, Science, and Computer Olympiad preparation with challenging problems</p>
+      <div class="space-y-2"><button class="exam-btn w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-3 rounded-lg font-semibold hover:from-yellow-600 hover:to-yellow-700 transition-all transform hover:scale-105 shadow-lg" data-exam="olympiad">All Olympiad Practice</button> <button class="math-olympiad-btn w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 rounded-lg font-semibold hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewbox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+        </svg> Math Olympiad Practice </button>
+      </div>
+     </div><!-- Job Exams -->
+     <div class="card-hover card-3d bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl border border-red-200 shadow-xl">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center mr-4 shadow-lg">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M20 6L9 17l-5-5" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-900">Job Exams</h3>
+      </div>
+      <p class="text-gray-600 mb-6">Government job exams, bank exams, and corporate recruitment tests</p><button class="exam-btn w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 rounded-lg font-semibold hover:from-red-600 hover:to-red-700 transition-all transform hover:scale-105 shadow-lg" data-exam="job">Start Practice</button>
+     </div><!-- General Knowledge -->
+     <div class="card-hover card-3d bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-xl border border-indigo-200 shadow-xl">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-lg flex items-center justify-center mr-4 shadow-lg">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-900">General Knowledge</h3>
+      </div>
+      <p class="text-gray-600 mb-6">Current affairs, history, geography, and general awareness preparation</p><button class="exam-btn w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-indigo-600 hover:to-indigo-700 transition-all transform hover:scale-105 shadow-lg" data-exam="gk">Start Practice</button>
+     </div>
+    </div>
+   </div>
+  </section><!-- Exam Tips Section -->
+  <section id="exam-tips" class="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 class="text-4xl font-bold text-gray-900 mb-6">📚 Exam Tips &amp; Study Strategies</h2>
+     <p class="text-xl text-gray-600">Expert tips to boost your exam performance and study efficiency</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Time Management -->
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg border border-blue-200">
+      <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">⏰ Time Management</h3>
+      <ul class="space-y-2 text-gray-600">
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Create a daily study schedule and stick to it</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Use Pomodoro technique: 25 min study + 5 min break</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Prioritize difficult subjects during peak hours</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Set weekly and monthly study goals</span></li>
+      </ul>
+     </div><!-- Memory Techniques -->
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg border border-green-200">
+      <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center mx-auto mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">🧠 Memory Techniques</h3>
+      <ul class="space-y-2 text-gray-600">
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Use mnemonics for formulas and facts</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Create mind maps for complex topics</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Practice active recall instead of re-reading</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Teach concepts to others to reinforce learning</span></li>
+      </ul>
+     </div><!-- Exam Day Strategy -->
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg border border-purple-200">
+      <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mx-auto mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">🎯 Exam Day Strategy</h3>
+      <ul class="space-y-2 text-gray-600">
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Read all questions before starting</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Attempt easy questions first</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Manage time per section wisely</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Review answers if time permits</span></li>
+      </ul>
+     </div><!-- Subject-wise Tips -->
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg border border-yellow-200">
+      <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-full flex items-center justify-center mx-auto mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">📖 Subject-wise Tips</h3>
+      <ul class="space-y-2 text-gray-600">
+       <li class="flex items-start"><span class="text-blue-500 mr-2">📊</span> <span><strong>Math:</strong> Practice daily, memorize formulas</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">🔬</span> <span><strong>Science:</strong> Understand concepts, not just memorize</span></li>
+       <li class="flex items-start"><span class="text-purple-500 mr-2">📚</span> <span><strong>English:</strong> Read newspapers, practice grammar</span></li>
+       <li class="flex items-start"><span class="text-red-500 mr-2">🌍</span> <span><strong>GK:</strong> Stay updated with current affairs</span></li>
+      </ul>
+     </div><!-- Practice Tips -->
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg border border-red-200"><!-- Practice Tips Illustration -->
+      <div class="w-full h-32 mb-6 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg flex items-center justify-center">
+       <svg class="w-full h-full" viewbox="0 0 200 120" fill="none"><!-- Desk/Table --> <rect x="20" y="80" width="160" height="8" rx="4" fill="#8b5cf6" /> <rect x="25" y="88" width="4" height="25" fill="#6d28d9" /> <rect x="171" y="88" width="4" height="25" fill="#6d28d9" /> <!-- Books Stack --> <rect x="30" y="70" width="25" height="4" rx="2" fill="#ef4444" /> <rect x="32" y="66" width="25" height="4" rx="2" fill="#dc2626" /> <rect x="34" y="62" width="25" height="4" rx="2" fill="#b91c1c" /> <!-- Question Papers --> <rect x="70" y="65" width="20" height="15" rx="2" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" /> <line x1="73" y1="69" x2="87" y2="69" stroke="#6b7280" stroke-width="1" /> <line x1="73" y1="72" x2="85" y2="72" stroke="#6b7280" stroke-width="1" /> <line x1="73" y1="75" x2="87" y2="75" stroke="#6b7280" stroke-width="1" /> <!-- Laptop/Computer --> <rect x="110" y="65" width="35" height="20" rx="2" fill="#374151" /> <rect x="112" y="67" width="31" height="16" rx="1" fill="#1f2937" /> <rect x="125" y="85" width="5" height="3" fill="#6b7280" /> <ellipse cx="127.5" cy="90" rx="8" ry="2" fill="#9ca3af" /> <!-- Clock showing time management --> <circle cx="160" cy="50" r="15" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" /> <line x1="160" y1="50" x2="160" y2="40" stroke="#1f2937" stroke-width="2" /> <line x1="160" y1="50" x2="167" y2="50" stroke="#1f2937" stroke-width="2" /> <circle cx="160" cy="50" r="1" fill="#1f2937" /> <!-- Practice arrows/progress --> <path d="M40 40 L50 35 L50 38 L65 38 L65 35 L75 40 L65 45 L65 42 L50 42 L50 45 Z" fill="#10b981" /> <!-- Success stars --> <polygon points="90,25 92,31 98,31 93,35 95,41 90,37 85,41 87,35 82,31 88,31" fill="#fbbf24" /> <polygon points="130,20 131,24 135,24 132,27 133,31 130,29 127,31 128,27 125,24 129,24" fill="#f59e0b" /> <!-- Study notes --> <rect x="150" y="65" width="18" height="12" rx="1" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" /> <line x1="152" y1="68" x2="166" y2="68" stroke="#3b82f6" stroke-width="1" /> <line x1="152" y1="71" x2="164" y2="71" stroke="#3b82f6" stroke-width="1" /> <line x1="152" y1="74" x2="166" y2="74" stroke="#3b82f6" stroke-width="1" /> <!-- Pencil --> <rect x="95" y="72" width="12" height="2" rx="1" fill="#fbbf24" /> <polygon points="107,72 110,73 107,74" fill="#1f2937" /> <rect x="93" y="72.5" width="2" height="1" fill="#ec4899" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">⚡ Practice Tips</h3>
+      <ul class="space-y-2 text-gray-600">
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Solve previous year question papers</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Take mock tests regularly</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Analyze your mistakes and weak areas</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Practice speed and accuracy together</span></li>
+      </ul>
+     </div><!-- Health & Wellness -->
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg border border-indigo-200">
+      <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-full flex items-center justify-center mx-auto mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">💪 Health &amp; Wellness</h3>
+      <ul class="space-y-2 text-gray-600">
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Get 7-8 hours of quality sleep</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Exercise regularly to reduce stress</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Eat healthy brain foods (nuts, fruits)</span></li>
+       <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <span>Practice meditation or deep breathing</span></li>
+      </ul>
+     </div>
+    </div><!-- Quick Tips Banner -->
+    <div class="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+     <h3 class="text-2xl font-bold mb-4">🚀 Quick Success Formula</h3>
+     <div class="grid md:grid-cols-4 gap-6 text-center">
+      <div class="bg-white/10 rounded-lg p-4">
+       <div class="text-3xl mb-2">
+        📅
+       </div>
+       <h4 class="font-semibold mb-1">Plan</h4>
+       <p class="text-sm opacity-90">Create a study schedule</p>
+      </div>
+      <div class="bg-white/10 rounded-lg p-4">
+       <div class="text-3xl mb-2">
+        📚
+       </div>
+       <h4 class="font-semibold mb-1">Study</h4>
+       <p class="text-sm opacity-90">Focus on understanding</p>
+      </div>
+      <div class="bg-white/10 rounded-lg p-4">
+       <div class="text-3xl mb-2">
+        ✍️
+       </div>
+       <h4 class="font-semibold mb-1">Practice</h4>
+       <p class="text-sm opacity-90">Solve mock tests daily</p>
+      </div>
+      <div class="bg-white/10 rounded-lg p-4">
+       <div class="text-3xl mb-2">
+        🎯
+       </div>
+       <h4 class="font-semibold mb-1">Achieve</h4>
+       <p class="text-sm opacity-90">Success guaranteed!</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Model Tests & Quizzes -->
+  <section id="tests" class="py-20 bg-gray-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 class="text-4xl font-bold text-gray-900 mb-6">Model Tests &amp; Quizzes</h2>
+     <p class="text-xl text-gray-600">Interactive practice sessions to test your knowledge</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg text-center">
+      <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+       </svg>
+      </div>
+      <h3 class="text-lg font-bold text-gray-900 mb-2">Quick Quiz</h3>
+      <p class="text-gray-600 text-sm mb-4">15 minutes • 20 questions</p><button class="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors">Start Quiz</button>
+     </div>
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg text-center">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-green-600" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+       </svg>
+      </div>
+      <h3 class="text-lg font-bold text-gray-900 mb-2">Mock Test</h3>
+      <p class="text-gray-600 text-sm mb-4">3 hours • 100 questions</p><button class="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition-colors">Start Test</button>
+     </div>
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg text-center">
+      <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" />
+       </svg>
+      </div>
+      <h3 class="text-lg font-bold text-gray-900 mb-2">Speed Test</h3>
+      <p class="text-gray-600 text-sm mb-4">5 minutes • 10 questions</p><button class="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors">Start Test</button>
+     </div>
+     <div class="card-hover bg-white p-6 rounded-xl shadow-lg text-center">
+      <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewbox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3z" />
+       </svg>
+      </div>
+      <h3 class="text-lg font-bold text-gray-900 mb-2">Subject Test</h3>
+      <p class="text-gray-600 text-sm mb-4">1 hour • 50 questions</p><button class="w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">Start Test</button>
+     </div>
+    </div><!-- Live Quiz Section -->
+    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border-2 border-purple-200">
+     <div class="text-center mb-8">
+      <div class="inline-flex items-center bg-red-500 text-white px-4 py-2 rounded-full mb-4 animate-pulse"><span class="w-3 h-3 bg-white rounded-full mr-2 animate-ping"></span> LIVE QUIZ
+      </div>
+      <h3 class="text-3xl font-bold text-gray-900 mb-2">🎯 Test Your Knowledge Now!</h3>
+      <p class="text-gray-600">Answer these questions and see how you score</p>
+     </div>
+     <div id="quiz-container" class="space-y-6"><!-- Quiz questions will be dynamically loaded here -->
+     </div>
+     <div id="quiz-result" class="hidden mt-8 text-center">
+      <div class="bg-white rounded-xl p-8 shadow-lg">
+       <div class="text-6xl mb-4">
+        🎉
+       </div>
+       <h4 class="text-2xl font-bold text-gray-900 mb-2">Quiz Completed!</h4>
+       <p class="text-xl text-gray-600 mb-4">Your Score: <span id="quiz-score" class="font-bold text-blue-600">0/3</span></p>
+       <p id="quiz-message" class="text-gray-600 mb-6"></p><button id="retake-quiz" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all">Retake Quiz</button>
+      </div>
+     </div>
+     <div id="submit-quiz-container" class="text-center mt-8 hidden"><button id="submit-quiz" class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-12 py-4 rounded-lg font-bold text-lg hover:from-green-600 hover:to-blue-600 transition-all transform hover:scale-105 shadow-lg"> Submit Quiz 🚀 </button>
+     </div>
+    </div>
+   </div>
+  </section><!-- YouTube Video Section -->
+  <section id="youtube-section" class="py-20 bg-gradient-to-br from-red-50 to-pink-50 hidden">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+     <h2 id="youtube-section-title" class="text-4xl font-bold text-gray-900 mb-6">Featured Video</h2>
+    </div>
+    <div class="max-w-4xl mx-auto">
+     <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="aspect-video"><iframe id="youtube-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="p-6 bg-gradient-to-r from-red-500 to-pink-500">
+       <div class="flex items-center justify-center space-x-3">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        </svg>
+        <p class="text-white text-lg font-semibold">Watch on YouTube</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Study Resources -->
+  <section id="resources" class="py-20 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 class="text-4xl font-bold text-gray-900 mb-6">Study Resources</h2>
+     <p class="text-xl text-gray-600">Comprehensive study materials to boost your preparation</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+     <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl border border-blue-200">
+      <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+       </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Study Notes</h3>
+      <p class="text-gray-600 mb-6">Comprehensive notes covering all important topics and concepts</p><button class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">Access Notes</button>
+     </div>
+     <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl border border-green-200">
+      <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+       </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Question Banks</h3>
+      <p class="text-gray-600 mb-6">Thousands of practice questions with detailed solutions</p><button class="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">Browse Questions</button>
+     </div>
+     <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl border border-purple-200">
+      <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-6">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+       </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Solution Guides</h3>
+      <p class="text-gray-600 mb-6">Step-by-step solutions and problem-solving techniques</p><button class="bg-purple-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-600 transition-colors">View Solutions</button>
+     </div>
+    </div>
+   </div>
+  </section><!-- Leaderboard Section -->
+  <section id="leaderboard" class="py-20 bg-gray-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 class="text-4xl font-bold text-gray-900 mb-6">Leaderboard &amp; Progress</h2>
+     <p class="text-xl text-gray-600">Track your performance and compete with other students</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-12"><!-- Leaderboard -->
+     <div class="bg-white rounded-xl shadow-lg p-8">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+       <svg class="w-6 h-6 text-yellow-500 mr-3" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+       </svg> Top Performers</h3>
+      <div class="space-y-4">
+       <div class="flex items-center justify-between p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg border border-yellow-200">
+        <div class="flex items-center">
+         <div class="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold mr-4">
+          1
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900">Rahul Sharma</p>
+          <p class="text-sm text-gray-600">SSC CGL</p>
+         </div>
+        </div>
+        <div class="text-right">
+         <p class="font-bold text-yellow-600">2,450 pts</p>
+         <p class="text-sm text-gray-600">98.5% avg</p>
+        </div>
+       </div>
+       <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+        <div class="flex items-center">
+         <div class="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center font-bold mr-4">
+          2
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900">Priya Patel</p>
+          <p class="text-sm text-gray-600">HSC Science</p>
+         </div>
+        </div>
+        <div class="text-right">
+         <p class="font-bold text-gray-600">2,380 pts</p>
+         <p class="text-sm text-gray-600">97.2% avg</p>
+        </div>
+       </div>
+       <div class="flex items-center justify-between p-4 bg-orange-50 rounded-lg border border-orange-200">
+        <div class="flex items-center">
+         <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mr-4">
+          3
+         </div>
+         <div>
+          <p class="font-semibold text-gray-900">Amit Kumar</p>
+          <p class="text-sm text-gray-600">Bank PO</p>
+         </div>
+        </div>
+        <div class="text-right">
+         <p class="font-bold text-orange-600">2,290 pts</p>
+         <p class="text-sm text-gray-600">95.8% avg</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- Progress Tracking -->
+     <div class="bg-white rounded-xl shadow-lg p-8">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+       <svg class="w-6 h-6 text-blue-500 mr-3" fill="currentColor" viewbox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
+       </svg> Your Progress</h3>
+      <div class="space-y-6">
+       <div>
+        <div class="flex justify-between mb-2"><span class="text-sm font-medium text-gray-700">Mathematics</span> <span class="text-sm text-gray-600">85%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+         <div class="progress-bar h-3 rounded-full" style="width: 85%"></div>
+        </div>
+       </div>
+       <div>
+        <div class="flex justify-between mb-2"><span class="text-sm font-medium text-gray-700">English</span> <span class="text-sm text-gray-600">92%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+         <div class="progress-bar h-3 rounded-full" style="width: 92%"></div>
+        </div>
+       </div>
+       <div>
+        <div class="flex justify-between mb-2"><span class="text-sm font-medium text-gray-700">General Knowledge</span> <span class="text-sm text-gray-600">78%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+         <div class="progress-bar h-3 rounded-full" style="width: 78%"></div>
+        </div>
+       </div>
+       <div>
+        <div class="flex justify-between mb-2"><span class="text-sm font-medium text-gray-700">Reasoning</span> <span class="text-sm text-gray-600">88%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+         <div class="progress-bar h-3 rounded-full" style="width: 88%"></div>
+        </div>
+       </div>
+      </div>
+      <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+       <p class="text-sm text-blue-800 font-medium">🎯 Keep it up! You're in the top 15% of students.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Contact Section -->
+  <section id="contact" class="py-20 gradient-bg">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <h2 id="contact-title" class="text-4xl font-bold text-white mb-6">Join Our Learning Community</h2>
+     <p class="text-xl text-white/90">Ready to start your journey to academic excellence?</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+     <div class="text-white">
+      <div class="space-y-8">
+       <div class="flex items-start">
+        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4 mt-1">
+         <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+         </svg>
+        </div>
+        <div>
+         <h3 class="text-xl font-semibold mb-2">Join Our Community</h3>
+         <p class="text-white/80 mb-4">Connect with thousands of students preparing for exams</p><a id="facebook-link" href="https://www.facebook.com/EurekaSphere" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+          </svg> Follow on Facebook </a>
+        </div>
+       </div>
+       <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+        <h4 class="text-lg font-semibold mb-3">Why Join Our Facebook Community?</h4>
+        <ul class="space-y-2 text-white/80">
+         <li class="flex items-center">
+          <svg class="w-4 h-4 text-green-400 mr-3" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg> Daily study tips and motivation</li>
+         <li class="flex items-center">
+          <svg class="w-4 h-4 text-green-400 mr-3" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg> Connect with fellow students</li>
+         <li class="flex items-center">
+          <svg class="w-4 h-4 text-green-400 mr-3" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg> Latest exam updates and news</li>
+         <li class="flex items-center">
+          <svg class="w-4 h-4 text-green-400 mr-3" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg> Free practice questions</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+      <form class="space-y-6">
+       <div><label for="name" class="block text-sm font-medium text-white mb-2">Full Name</label> <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Enter your full name">
+       </div>
+       <div><label for="email" class="block text-sm font-medium text-white mb-2">Email Address</label> <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Enter your email">
+       </div>
+       <div><label for="exam" class="block text-sm font-medium text-white mb-2">Interested Exam</label> <select id="exam" name="exam" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-white/50"> <option value="" style="color: black;">Select an exam</option> <option value="ssc" style="color: black;">SSC Exams</option> <option value="hsc" style="color: black;">HSC Exams</option> <option value="admission" style="color: black;">Admission Tests</option> <option value="olympiad" style="color: black;">Olympiad</option> <option value="job" style="color: black;">Job Exams</option> </select>
+       </div>
+       <div><label for="message" class="block text-sm font-medium text-white mb-2">Message</label> <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Tell us about your goals"></textarea>
+       </div><button type="submit" class="w-full bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">Join EurekaSphere</button>
+      </form>
+     </div>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+     <div>
+      <div class="flex items-center space-x-3 mb-4"><img src="https://raw.githubusercontent.com/nasrinaktheref/abidimage/18ea1240742f52a75cdcd22721498348e85d2ae9/Untitled%20design.png" alt="EurekaSphere Logo" class="w-8 h-8 rounded-lg object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+       <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center" style="display: none;">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" /> <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" />
+        </svg>
+       </div><span class="text-xl font-bold text-white">EurekaSphere</span>
+      </div>
+      <p id="footer-description" class="text-white opacity-80">Empowering students to achieve academic excellence through innovative learning solutions.</p>
+     </div>
+     <div>
+      <h3 class="text-lg font-semibold mb-4 text-white">Quick Links</h3>
+      <ul class="space-y-2">
+       <li><a href="#home" class="text-white opacity-80 hover:opacity-100 transition-opacity">Home</a></li>
+       <li><a href="#about" class="text-white opacity-80 hover:opacity-100 transition-opacity">About</a></li>
+       <li><a href="#exams" class="text-white opacity-80 hover:opacity-100 transition-opacity">Exams</a></li>
+       <li><a href="#tests" class="text-white opacity-80 hover:opacity-100 transition-opacity">Tests</a></li>
+      </ul>
+     </div>
+     <div>
+      <h3 class="text-lg font-semibold mb-4 text-white">Exams</h3>
+      <ul class="space-y-2">
+       <li><a href="#" class="text-white opacity-80 hover:opacity-100 transition-opacity">SSC Exams</a></li>
+       <li><a href="#" class="text-white opacity-80 hover:opacity-100 transition-opacity">HSC Exams</a></li>
+       <li><a href="#" class="text-white opacity-80 hover:opacity-100 transition-opacity">Admission Tests</a></li>
+       <li><a href="#" class="text-white opacity-80 hover:opacity-100 transition-opacity">Olympiad</a></li>
+      </ul>
+     </div>
+     <div>
+      <h3 class="text-lg font-semibold mb-4 text-white">Connect</h3>
+      <div class="flex space-x-4 mb-4"><a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+        </svg></a> <a href="#" class="w-10 h-10 bg-blue-800 rounded-full flex items-center justify-center hover:bg-blue-900 transition-colors">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
+        </svg></a> <a href="#" class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.221.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z" />
+        </svg></a>
+      </div><button id="admin-login-btn" class="text-xs text-white opacity-60 hover:opacity-100 transition-opacity">Admin Login</button>
+     </div>
+    </div>
+    <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+     <p id="copyright-text" class="text-white opacity-80">© 2024 EurekaSphere. All rights reserved. Empowering students worldwide.</p>
+    </div>
+   </div>
+  </footer><!-- Admin Login Modal -->
+  <div id="admin-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+   <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+    <div class="flex justify-between items-center mb-6">
+     <h3 class="text-2xl font-bold text-gray-900">Admin Login</h3><button id="close-admin-modal" class="text-gray-500 hover:text-gray-700">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg></button>
+    </div>
+    <form id="admin-login-form" class="space-y-4">
+     <div><label for="admin-username" class="block text-sm font-medium text-gray-700 mb-2">Username</label> <input type="text" id="admin-username" name="username" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter admin username">
+     </div>
+     <div><label for="admin-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label> <input type="password" id="admin-password" name="password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter admin password">
+     </div><button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Login as Admin</button>
+    </form>
+   </div>
+  </div><!-- Student List Modal -->
+  <div id="student-list-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+   <div class="bg-white rounded-xl p-8 max-w-4xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+     <h3 class="text-2xl font-bold text-gray-900">Student Registrations</h3><button id="close-student-modal" class="text-gray-500 hover:text-gray-700">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg></button>
+    </div>
+    <div class="overflow-x-auto">
+     <table class="w-full border-collapse border border-gray-300">
+      <thead>
+       <tr class="bg-gray-50">
+        <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Exam</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Message</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Date</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+       </tr>
+      </thead>
+      <tbody id="student-table-body"><!-- Student data will be populated here -->
+      </tbody>
+     </table>
+    </div>
+    <div id="no-students" class="text-center py-8 text-gray-500 hidden">
+     <p>No student registrations yet.</p>
+    </div>
+   </div>
+  </div><!-- Admin Panel -->
+  <div id="admin-panel" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto">
+   <div class="min-h-screen bg-gray-50"><!-- Admin Header -->
+    <div class="bg-white shadow-sm border-b">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+       <div>
+        <h1 class="text-2xl font-bold text-gray-900">EurekaSphere Admin Panel</h1>
+        <p id="admin-role-display" class="text-sm text-gray-600"></p>
+       </div><button id="admin-logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">Logout</button>
+      </div>
+     </div>
+    </div><!-- Admin Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Exam Links Management -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+       <h3 class="text-xl font-bold text-gray-900 mb-4">Exam Links</h3>
+       <div class="space-y-4">
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">SSC Exam Link</label> <input type="url" id="ssc-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/ssc-exam">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">HSC Exam Link</label> <input type="url" id="hsc-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/hsc-exam">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Admission Test Link</label> <input type="url" id="admission-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/admission-test">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Olympiad Link</label> <input type="url" id="olympiad-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/olympiad">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Job Exam Link</label> <input type="url" id="job-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/job-exam">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">General Knowledge Link</label> <input type="url" id="gk-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/general-knowledge">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Math Olympiad Link</label> <input type="url" id="math-olympiad-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/math-olympiad">
+        </div><button id="save-exam-links" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors">Save Exam Links</button>
+       </div>
+      </div><!-- Content Management -->
+      <div class="bg-white rounded-xl shadow-lg p-6 md:col-span-2">
+       <h3 class="text-xl font-bold text-gray-900 mb-4">Content Management</h3>
+       <div class="grid md:grid-cols-2 gap-4">
+        <div class="space-y-4">
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Brand Name</label> <input type="text" id="admin-brand-name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="EurekaSphere">
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Main Tagline</label> <input type="text" id="admin-tagline" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Learn. Practice. Excel.">
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Hero Subtitle</label> <textarea id="admin-subtitle" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your gateway to academic excellence..."></textarea>
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">About Title</label> <input type="text" id="admin-about-title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="About EurekaSphere">
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">About Description</label> <textarea id="admin-about-description" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="EurekaSphere description..."></textarea>
+         </div>
+        </div>
+        <div class="space-y-4">
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Exam Prep Title</label> <input type="text" id="admin-exam-prep-title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Exam Preparation">
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Contact Title</label> <input type="text" id="admin-contact-title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Join Our Learning Community">
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Facebook Page URL</label> <input type="url" id="admin-facebook-url" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://www.facebook.com/EurekaSphere">
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Copyright Text</label> <input type="text" id="admin-copyright" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="© 2024 EurekaSphere. All rights reserved.">
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-2">Footer Description</label> <textarea id="admin-footer-description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Empowering students to achieve academic excellence..."></textarea>
+         </div>
+        </div>
+       </div><button id="save-content" class="w-full mt-4 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-semibold">Save All Content</button>
+      </div><!-- Add New Content Section -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+       <h3 class="text-xl font-bold text-gray-900 mb-4">Add New Content</h3>
+       <div class="space-y-4">
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Content Type</label> <select id="new-content-type" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select content type</option> <option value="announcement">Announcement</option> <option value="news">News Update</option> <option value="feature">New Feature</option> <option value="exam">New Exam Category</option> </select>
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Title</label> <input type="text" id="new-content-title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter content title">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Description</label> <textarea id="new-content-description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter content description"></textarea>
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Link (Optional)</label> <input type="url" id="new-content-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com">
+        </div><button id="add-new-content" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors">Add Content</button>
+       </div><!-- Added Content List -->
+       <div class="mt-6">
+        <h4 class="text-lg font-semibold text-gray-900 mb-3">Added Content</h4>
+        <div id="added-content-list" class="space-y-2 max-h-60 overflow-y-auto"><!-- Dynamic content will be added here -->
+        </div>
+       </div>
+      </div><!-- Student Data Management -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+       <h3 class="text-xl font-bold text-gray-900 mb-4">Student Registrations</h3>
+       <div class="space-y-4">
+        <div class="bg-blue-50 p-4 rounded-lg">
+         <div class="text-2xl font-bold text-blue-600" id="total-students">
+          0
+         </div>
+         <div class="text-sm text-gray-600">
+          Total Students
+         </div>
+        </div>
+        <div class="bg-green-50 p-4 rounded-lg">
+         <div class="text-2xl font-bold text-green-600" id="ssc-students">
+          0
+         </div>
+         <div class="text-sm text-gray-600">
+          SSC Students
+         </div>
+        </div>
+        <div class="bg-purple-50 p-4 rounded-lg">
+         <div class="text-2xl font-bold text-purple-600" id="hsc-students">
+          0
+         </div>
+         <div class="text-sm text-gray-600">
+          HSC Students
+         </div>
+        </div>
+        <div class="bg-yellow-50 p-4 rounded-lg">
+         <div class="text-2xl font-bold text-yellow-600" id="admission-students">
+          0
+         </div>
+         <div class="text-sm text-gray-600">
+          Admission Students
+         </div>
+        </div>
+       </div><button id="view-students" class="w-full mt-4 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors">View All Students</button>
+      </div><!-- YouTube Video Management -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+       <h3 class="text-xl font-bold text-gray-900 mb-4">YouTube Video Section</h3>
+       <div class="space-y-4">
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">Video Title</label> <input type="text" id="youtube-title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter video title">
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-2">YouTube Video Link</label> <input type="url" id="youtube-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://www.youtube.com/watch?v=...">
+         <p class="text-xs text-gray-500 mt-1">Paste the full YouTube video URL</p>
+        </div><button id="save-youtube" class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors">Save YouTube Video</button>
+       </div>
+      </div><!-- Live Quiz Management -->
+      <div class="bg-white rounded-xl shadow-lg p-6 md:col-span-2">
+       <h3 class="text-xl font-bold text-gray-900 mb-4">Live Quiz Management</h3><!-- Quiz 1 -->
+       <div class="mb-6 p-4 border border-gray-200 rounded-lg">
+        <h4 class="font-semibold text-gray-900 mb-3">Quiz 1</h4>
+        <div class="space-y-3">
+         <div><label class="block text-sm font-medium text-gray-700 mb-1">Question</label> <input type="text" id="quiz1-question" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter question">
+         </div>
+         <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option A</label> <input type="text" id="quiz1-optionA" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option A">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option B</label> <input type="text" id="quiz1-optionB" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option B">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option C</label> <input type="text" id="quiz1-optionC" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option C">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option D</label> <input type="text" id="quiz1-optionD" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option D">
+          </div>
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-1">Correct Answer</label> <select id="quiz1-answer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select correct answer</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option> </select>
+         </div>
+        </div>
+       </div><!-- Quiz 2 -->
+       <div class="mb-6 p-4 border border-gray-200 rounded-lg">
+        <h4 class="font-semibold text-gray-900 mb-3">Quiz 2</h4>
+        <div class="space-y-3">
+         <div><label class="block text-sm font-medium text-gray-700 mb-1">Question</label> <input type="text" id="quiz2-question" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter question">
+         </div>
+         <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option A</label> <input type="text" id="quiz2-optionA" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option A">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option B</label> <input type="text" id="quiz2-optionB" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option B">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option C</label> <input type="text" id="quiz2-optionC" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option C">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option D</label> <input type="text" id="quiz2-optionD" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option D">
+          </div>
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-1">Correct Answer</label> <select id="quiz2-answer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select correct answer</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option> </select>
+         </div>
+        </div>
+       </div><!-- Quiz 3 -->
+       <div class="mb-6 p-4 border border-gray-200 rounded-lg">
+        <h4 class="font-semibold text-gray-900 mb-3">Quiz 3</h4>
+        <div class="space-y-3">
+         <div><label class="block text-sm font-medium text-gray-700 mb-1">Question</label> <input type="text" id="quiz3-question" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter question">
+         </div>
+         <div class="grid grid-cols-2 gap-3">
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option A</label> <input type="text" id="quiz3-optionA" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option A">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option B</label> <input type="text" id="quiz3-optionB" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option B">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option C</label> <input type="text" id="quiz3-optionC" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option C">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-1">Option D</label> <input type="text" id="quiz3-optionD" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Option D">
+          </div>
+         </div>
+         <div><label class="block text-sm font-medium text-gray-700 mb-1">Correct Answer</label> <select id="quiz3-answer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select correct answer</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option> </select>
+         </div>
+        </div>
+       </div><button id="save-quizzes" class="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors font-semibold">Save All Quizzes</button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        // Admin credentials (in real app, this would be server-side)
+        const ADMIN_CREDENTIALS = [
+            { username: 'admin', password: 'eureka2024', role: 'Super Admin' },
+            { username: 'admin1', password: 'eureka123', role: 'Content Manager' },
+            { username: 'admin2', password: 'eureka456', role: 'Quiz Manager' },
+            { username: 'admin3', password: 'eureka789', role: 'Student Manager' },
+            { username: 'admin4', password: 'eureka321', role: 'Exam Manager' },
+            { username: 'admin5', password: 'eureka654', role: 'General Admin' }
+        ];
+
+        // Admin state
+        let isAdminLoggedIn = false;
+        let currentAdmin = null;
+        let examLinks = {
+            ssc: '',
+            hsc: '',
+            admission: '',
+            olympiad: '',
+            job: '',
+            gk: '',
+            mathOlympiad: ''
+        };
+
+        // YouTube video state
+        let youtubeData = {
+            title: '',
+            link: ''
+        };
+
+        // Quiz state
+        let quizData = {
+            quiz1: {
+                question: '',
+                optionA: '',
+                optionB: '',
+                optionC: '',
+                optionD: '',
+                answer: ''
+            },
+            quiz2: {
+                question: '',
+                optionA: '',
+                optionB: '',
+                optionC: '',
+                optionD: '',
+                answer: ''
+            },
+            quiz3: {
+                question: '',
+                optionA: '',
+                optionB: '',
+                optionC: '',
+                optionD: '',
+                answer: ''
+            }
+        };
+        let userAnswers = {};
+
+        // Student data storage
+        let studentData = [];
+        let isDataSdkInitialized = false;
+
+        // Data SDK Handler
+        const dataHandler = {
+            onDataChanged(data) {
+                studentData = data;
+                updateStudentStats();
+                updateStudentTable();
+            }
+        };
+
+        // Initialize Data SDK
+        async function initializeDataSdk() {
+            if (window.dataSdk && !isDataSdkInitialized) {
+                try {
+                    const result = await window.dataSdk.init(dataHandler);
+                    if (result.isOk) {
+                        isDataSdkInitialized = true;
+                        console.log('Data SDK initialized successfully');
+                    } else {
+                        console.error('Failed to initialize Data SDK:', result.error);
+                    }
+                } catch (error) {
+                    console.error('Error initializing Data SDK:', error);
+                }
+            }
+        }
+
+        // Update student statistics
+        function updateStudentStats() {
+            const totalStudents = studentData.length;
+            const sscStudents = studentData.filter(s => s.exam === 'ssc').length;
+            const hscStudents = studentData.filter(s => s.exam === 'hsc').length;
+            const admissionStudents = studentData.filter(s => s.exam === 'admission').length;
+
+            document.getElementById('total-students').textContent = totalStudents;
+            document.getElementById('ssc-students').textContent = sscStudents;
+            document.getElementById('hsc-students').textContent = hscStudents;
+            document.getElementById('admission-students').textContent = admissionStudents;
+        }
+
+        // Update student table
+        function updateStudentTable() {
+            const tableBody = document.getElementById('student-table-body');
+            const noStudentsDiv = document.getElementById('no-students');
+            
+            if (studentData.length === 0) {
+                tableBody.innerHTML = '';
+                noStudentsDiv.classList.remove('hidden');
+                return;
+            }
+            
+            noStudentsDiv.classList.add('hidden');
+            tableBody.innerHTML = '';
+            
+            studentData.forEach(student => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="border border-gray-300 px-4 py-2">${student.name}</td>
+                    <td class="border border-gray-300 px-4 py-2">${student.email}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">
+                            ${student.exam ? student.exam.toUpperCase() : 'Not specified'}
+                        </span>
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2 max-w-xs truncate" title="${student.message || 'No message'}">${student.message || 'No message'}</td>
+                    <td class="border border-gray-300 px-4 py-2 text-sm">${new Date(student.submittedAt).toLocaleDateString()}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <button onclick="deleteStudent('${student.__backendId}')" class="text-red-500 hover:text-red-700 text-sm">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Delete student function
+        async function deleteStudent(backendId) {
+            const student = studentData.find(s => s.__backendId === backendId);
+            if (!student) return;
+            
+            // Create confirmation UI instead of using confirm()
+            const confirmDiv = document.createElement('div');
+            confirmDiv.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center';
+            confirmDiv.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+                    <h3 class="text-lg font-semibold mb-4">Confirm Delete</h3>
+                    <p class="text-gray-600 mb-6">Are you sure you want to delete ${student.name}'s registration?</p>
+                    <div class="flex gap-3">
+                        <button id="confirm-delete" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                        <button id="cancel-delete" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(confirmDiv);
+            
+            document.getElementById('confirm-delete').addEventListener('click', async () => {
+                try {
+                    const result = await window.dataSdk.delete(student);
+                    if (result.isOk) {
+                        showNotification('Student deleted successfully!', 'success');
+                    } else {
+                        showNotification('Failed to delete student. Please try again.', 'error');
+                    }
+                } catch (error) {
+                    showNotification('Error deleting student.', 'error');
+                }
+                document.body.removeChild(confirmDiv);
+            });
+            
+            document.getElementById('cancel-delete').addEventListener('click', () => {
+                document.body.removeChild(confirmDiv);
+            });
+        }
+
+        // Make deleteStudent function global
+        window.deleteStudent = deleteStudent;
+
+        // Configuration object for editable features
+        const defaultConfig = {
+            brand_name: "EurekaSphere",
+            main_tagline: "Smart Study. Easy Practice. Success Guaranteed.",
+            hero_subtitle: "Your gateway to academic excellence through innovative learning and practice",
+            about_title: "About EurekaSphere",
+            about_description: "EurekaSphere is an innovative educational community that inspires students to learn smartly. We provide creative tools, question banks, and AI-powered study support for students who want to achieve success in their academic and career journeys.",
+            exam_prep_title: "Exam Preparation",
+            contact_title: "Join Our Learning Community",
+            facebook_url: "https://www.facebook.com/EurekaSphere",
+            copyright_text: "© 2024 EurekaSphere. All rights reserved. Empowering students worldwide.",
+            footer_description: "Empowering students to achieve academic excellence through innovative learning solutions.",
+            primary_color: "#3b82f6",
+            secondary_color: "#10b981",
+            background_color: "#ffffff",
+            text_color: "#1f2937",
+            accent_color: "#8b5cf6",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        // Admin Login Modal Functions
+        document.getElementById('admin-login-btn').addEventListener('click', function() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+        });
+
+        document.getElementById('close-admin-modal').addEventListener('click', function() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        });
+
+        // Admin Login Form
+        document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            
+            // Check credentials against all admin accounts
+            const admin = ADMIN_CREDENTIALS.find(cred => 
+                cred.username === username && cred.password === password
+            );
+            
+            if (admin) {
+                isAdminLoggedIn = true;
+                currentAdmin = admin;
+                document.getElementById('admin-modal').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+                loadAdminData();
+                showNotification(`Welcome ${admin.role}! Login successful.`, 'success');
+            } else {
+                showNotification('Invalid credentials. Please try again.', 'error');
+            }
+        });
+
+        // Admin Logout
+        document.getElementById('admin-logout').addEventListener('click', function() {
+            isAdminLoggedIn = false;
+            currentAdmin = null;
+            document.getElementById('admin-panel').classList.add('hidden');
+            document.getElementById('admin-login-form').reset();
+            showNotification('Logged out successfully!', 'success');
+        });
+
+        // Student List Modal Handlers
+        document.getElementById('view-students').addEventListener('click', function() {
+            if (isAdminLoggedIn) {
+                document.getElementById('student-list-modal').classList.remove('hidden');
+                updateStudentTable();
+                // Ensure the modal is properly displayed
+                document.getElementById('student-list-modal').style.display = 'flex';
+            } else {
+                showNotification('Please login as admin first.', 'error');
+            }
+        });
+
+        document.getElementById('close-student-modal').addEventListener('click', function() {
+            document.getElementById('student-list-modal').classList.add('hidden');
+            document.getElementById('student-list-modal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('student-list-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+                this.style.display = 'none';
+            }
+        });
+
+        // YouTube video functions
+        function extractYouTubeVideoId(url) {
+            const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[7].length === 11) ? match[7] : null;
+        }
+
+        function displayYouTubeVideo() {
+            const section = document.getElementById('youtube-section');
+            const iframe = document.getElementById('youtube-iframe');
+            const titleElement = document.getElementById('youtube-section-title');
+            
+            if (youtubeData.link && youtubeData.link.trim() !== '') {
+                const videoId = extractYouTubeVideoId(youtubeData.link);
+                
+                if (videoId) {
+                    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                    titleElement.textContent = youtubeData.title || 'Featured Video';
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            } else {
+                section.classList.add('hidden');
+            }
+        }
+
+        // Save YouTube video
+        document.getElementById('save-youtube').addEventListener('click', function() {
+            const title = document.getElementById('youtube-title').value;
+            const link = document.getElementById('youtube-link').value;
+            
+            if (!link || link.trim() === '') {
+                showNotification('Please enter a YouTube video link!', 'error');
+                return;
+            }
+            
+            const videoId = extractYouTubeVideoId(link);
+            if (!videoId) {
+                showNotification('Invalid YouTube link! Please enter a valid YouTube video URL.', 'error');
+                return;
+            }
+            
+            youtubeData.title = title || 'Featured Video';
+            youtubeData.link = link;
+            
+            displayYouTubeVideo();
+            showNotification('YouTube video saved successfully! Students can now watch it.', 'success');
+        });
+
+        // Load Admin Data
+        function loadAdminData() {
+            // Display admin role
+            if (currentAdmin) {
+                const roleDisplay = document.getElementById('admin-role-display');
+                if (roleDisplay) {
+                    roleDisplay.textContent = `Logged in as: ${currentAdmin.username} (${currentAdmin.role})`;
+                }
+            }
+            
+            // Load exam links
+            document.getElementById('ssc-link').value = examLinks.ssc;
+            document.getElementById('hsc-link').value = examLinks.hsc;
+            document.getElementById('admission-link').value = examLinks.admission;
+            document.getElementById('olympiad-link').value = examLinks.olympiad;
+            document.getElementById('job-link').value = examLinks.job;
+            document.getElementById('gk-link').value = examLinks.gk;
+            document.getElementById('math-olympiad-link').value = examLinks.mathOlympiad;
+            
+            // Load YouTube data
+            document.getElementById('youtube-title').value = youtubeData.title;
+            document.getElementById('youtube-link').value = youtubeData.link;
+            
+            // Load content
+            document.getElementById('admin-brand-name').value = defaultConfig.brand_name || 'EurekaSphere';
+            document.getElementById('admin-tagline').value = defaultConfig.main_tagline;
+            document.getElementById('admin-subtitle').value = defaultConfig.hero_subtitle;
+            document.getElementById('admin-about-title').value = defaultConfig.about_title;
+            document.getElementById('admin-about-description').value = defaultConfig.about_description;
+            document.getElementById('admin-exam-prep-title').value = defaultConfig.exam_prep_title;
+            document.getElementById('admin-contact-title').value = defaultConfig.contact_title;
+            document.getElementById('admin-facebook-url').value = defaultConfig.facebook_url || 'https://www.facebook.com/EurekaSphere';
+            document.getElementById('admin-copyright').value = defaultConfig.copyright_text || '© 2024 EurekaSphere. All rights reserved. Empowering students worldwide.';
+            document.getElementById('admin-footer-description').value = defaultConfig.footer_description || 'Empowering students to achieve academic excellence through innovative learning solutions.';
+            
+            // Load quiz data
+            loadQuizDataToAdmin();
+        }
+
+        // Load quiz data to admin panel
+        function loadQuizDataToAdmin() {
+            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
+                const quiz = quizData[quizId];
+                document.getElementById(`${quizId}-question`).value = quiz.question || '';
+                document.getElementById(`${quizId}-optionA`).value = quiz.optionA || '';
+                document.getElementById(`${quizId}-optionB`).value = quiz.optionB || '';
+                document.getElementById(`${quizId}-optionC`).value = quiz.optionC || '';
+                document.getElementById(`${quizId}-optionD`).value = quiz.optionD || '';
+                document.getElementById(`${quizId}-answer`).value = quiz.answer || '';
+            });
+        }
+
+        // Save quiz data
+        document.getElementById('save-quizzes').addEventListener('click', function() {
+            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
+                quizData[quizId] = {
+                    question: document.getElementById(`${quizId}-question`).value,
+                    optionA: document.getElementById(`${quizId}-optionA`).value,
+                    optionB: document.getElementById(`${quizId}-optionB`).value,
+                    optionC: document.getElementById(`${quizId}-optionC`).value,
+                    optionD: document.getElementById(`${quizId}-optionD`).value,
+                    answer: document.getElementById(`${quizId}-answer`).value
+                };
+            });
+            
+            renderQuiz();
+            showNotification('All quizzes saved successfully! Students can now see the updated questions.', 'success');
+        });
+
+        // Render quiz on the page
+        function renderQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+            userAnswers = {};
+            
+            let hasQuestions = false;
+            
+            ['quiz1', 'quiz2', 'quiz3'].forEach((quizId, index) => {
+                const quiz = quizData[quizId];
+                
+                if (quiz.question && quiz.optionA && quiz.optionB && quiz.optionC && quiz.optionD && quiz.answer) {
+                    hasQuestions = true;
+                    const quizElement = document.createElement('div');
+                    quizElement.className = 'bg-white rounded-xl p-6 shadow-lg';
+                    quizElement.innerHTML = `
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Question ${index + 1}</h4>
+                        <p class="text-lg text-gray-700 mb-6">${quiz.question}</p>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                                <input type="radio" name="${quizId}" value="A" class="w-5 h-5 text-blue-600 mr-4">
+                                <span class="text-gray-700"><strong>A.</strong> ${quiz.optionA}</span>
+                            </label>
+                            <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                                <input type="radio" name="${quizId}" value="B" class="w-5 h-5 text-blue-600 mr-4">
+                                <span class="text-gray-700"><strong>B.</strong> ${quiz.optionB}</span>
+                            </label>
+                            <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                                <input type="radio" name="${quizId}" value="C" class="w-5 h-5 text-blue-600 mr-4">
+                                <span class="text-gray-700"><strong>C.</strong> ${quiz.optionC}</span>
+                            </label>
+                            <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                                <input type="radio" name="${quizId}" value="D" class="w-5 h-5 text-blue-600 mr-4">
+                                <span class="text-gray-700"><strong>D.</strong> ${quiz.optionD}</span>
+                            </label>
+                        </div>
+                    `;
+                    quizContainer.appendChild(quizElement);
+                }
+            });
+            
+            if (hasQuestions) {
+                document.getElementById('submit-quiz-container').classList.remove('hidden');
+                document.getElementById('quiz-result').classList.add('hidden');
+            } else {
+                quizContainer.innerHTML = '<div class="bg-white rounded-xl p-8 text-center"><p class="text-gray-500 text-lg">No quiz questions available yet. Admin will add questions soon!</p></div>';
+                document.getElementById('submit-quiz-container').classList.add('hidden');
+            }
+        }
+
+        // Submit quiz
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            userAnswers = {};
+            let allAnswered = true;
+            
+            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
+                const quiz = quizData[quizId];
+                if (quiz.question) {
+                    const selected = document.querySelector(`input[name="${quizId}"]:checked`);
+                    if (selected) {
+                        userAnswers[quizId] = selected.value;
+                    } else {
+                        allAnswered = false;
+                    }
+                }
+            });
+            
+            if (!allAnswered) {
+                showNotification('Please answer all questions before submitting!', 'error');
+                return;
+            }
+            
+            // Calculate score
+            let score = 0;
+            let totalQuestions = 0;
+            
+            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
+                const quiz = quizData[quizId];
+                if (quiz.question) {
+                    totalQuestions++;
+                    if (userAnswers[quizId] === quiz.answer) {
+                        score++;
+                    }
+                }
+            });
+            
+            // Show result
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('submit-quiz-container').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('quiz-score').textContent = `${score}/${totalQuestions}`;
+            
+            const percentage = (score / totalQuestions) * 100;
+            let message = '';
+            
+            if (percentage === 100) {
+                message = '🌟 Perfect score! You\'re a genius!';
+            } else if (percentage >= 66) {
+                message = '👏 Great job! Keep up the good work!';
+            } else if (percentage >= 33) {
+                message = '💪 Good effort! Practice more to improve!';
+            } else {
+                message = '📚 Keep learning! You\'ll do better next time!';
+            }
+            
+            document.getElementById('quiz-message').textContent = message;
+        });
+
+        // Retake quiz
+        document.getElementById('retake-quiz').addEventListener('click', function() {
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('submit-quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        });
+
+        // Save Exam Links
+        document.getElementById('save-exam-links').addEventListener('click', function() {
+            examLinks.ssc = document.getElementById('ssc-link').value;
+            examLinks.hsc = document.getElementById('hsc-link').value;
+            examLinks.admission = document.getElementById('admission-link').value;
+            examLinks.olympiad = document.getElementById('olympiad-link').value;
+            examLinks.job = document.getElementById('job-link').value;
+            examLinks.gk = document.getElementById('gk-link').value;
+            examLinks.mathOlympiad = document.getElementById('math-olympiad-link').value;
+            
+            showNotification('Exam links saved successfully!', 'success');
+        });
+
+        // Save Content
+        document.getElementById('save-content').addEventListener('click', function() {
+            const newBrandName = document.getElementById('admin-brand-name').value;
+            const newTagline = document.getElementById('admin-tagline').value;
+            const newSubtitle = document.getElementById('admin-subtitle').value;
+            const newAboutTitle = document.getElementById('admin-about-title').value;
+            const newAboutDescription = document.getElementById('admin-about-description').value;
+            const newExamPrepTitle = document.getElementById('admin-exam-prep-title').value;
+            const newContactTitle = document.getElementById('admin-contact-title').value;
+            const newFacebookUrl = document.getElementById('admin-facebook-url').value;
+            const newCopyright = document.getElementById('admin-copyright').value;
+            const newFooterDescription = document.getElementById('admin-footer-description').value;
+            
+            // Update the page content
+            document.getElementById('brand-name').textContent = newBrandName;
+            document.getElementById('main-tagline').textContent = newTagline;
+            document.getElementById('hero-subtitle').textContent = newSubtitle;
+            document.getElementById('about-title').textContent = newAboutTitle;
+            document.getElementById('about-description').textContent = newAboutDescription;
+            document.getElementById('exam-prep-title').textContent = newExamPrepTitle;
+            document.getElementById('contact-title').textContent = newContactTitle;
+            document.getElementById('copyright-text').textContent = newCopyright;
+            document.getElementById('footer-description').textContent = newFooterDescription;
+            
+            // Update Facebook link
+            const facebookLink = document.getElementById('facebook-link');
+            if (facebookLink && newFacebookUrl) {
+                facebookLink.href = newFacebookUrl;
+            }
+            
+            // Update config
+            defaultConfig.brand_name = newBrandName;
+            defaultConfig.main_tagline = newTagline;
+            defaultConfig.hero_subtitle = newSubtitle;
+            defaultConfig.about_title = newAboutTitle;
+            defaultConfig.about_description = newAboutDescription;
+            defaultConfig.exam_prep_title = newExamPrepTitle;
+            defaultConfig.contact_title = newContactTitle;
+            defaultConfig.facebook_url = newFacebookUrl;
+            defaultConfig.copyright_text = newCopyright;
+            defaultConfig.footer_description = newFooterDescription;
+            
+            showNotification('All content updated successfully!', 'success');
+        });
+
+        // Exam Button Click Handler
+        document.querySelectorAll('.exam-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const examType = this.getAttribute('data-exam');
+                const link = examLinks[examType];
+                
+                if (link && link.trim() !== '') {
+                    window.open(link, '_blank', 'noopener,noreferrer');
+                } else {
+                    showNotification(`${examType.toUpperCase()} exam link not configured yet. Please contact admin.`, 'info');
+                }
+            });
+        });
+
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Form submission handler
+        document.querySelector('form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const exam = formData.get('exam');
+            const message = formData.get('message');
+            
+            // Simple validation
+            if (!name || !email) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Check if we've reached the limit
+            if (studentData.length >= 999) {
+                showNotification('Maximum limit of 999 student registrations reached. Please contact admin.', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+            
+            try {
+                // Create student record
+                const studentRecord = {
+                    name: name,
+                    email: email,
+                    exam: exam || 'not-specified',
+                    message: message || '',
+                    submittedAt: new Date().toISOString(),
+                    status: 'new'
+                };
+                
+                if (window.dataSdk && isDataSdkInitialized) {
+                    const result = await window.dataSdk.create(studentRecord);
+                    if (result.isOk) {
+                        showNotification('ধন্যবাদ! আপনার রেজিস্ট্রেশন সফল হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।', 'success');
+                        this.reset();
+                    } else {
+                        showNotification('Registration failed. Please try again.', 'error');
+                    }
+                } else {
+                    // Fallback if SDK not available
+                    showNotification('Thank you for joining EurekaSphere! We\'ll contact you soon.', 'success');
+                    this.reset();
+                }
+            } catch (error) {
+                showNotification('An error occurred. Please try again.', 'error');
+            } finally {
+                // Reset button state
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Math Olympiad Button Handler
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('math-olympiad-btn')) {
+                const link = examLinks.mathOlympiad;
+                
+                if (link && link.trim() !== '') {
+                    window.open(link, '_blank', 'noopener,noreferrer');
+                } else {
+                    showNotification('Math Olympiad practice link not configured yet. Please contact admin.', 'info');
+                }
+            }
+        });
+
+        // Button click handlers
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Start') || button.textContent.includes('Access') || button.textContent.includes('Browse') || button.textContent.includes('View')) {
+                if (!button.classList.contains('exam-btn') && !button.classList.contains('math-olympiad-btn')) {
+                    button.addEventListener('click', function() {
+                        const action = this.textContent;
+                        showNotification(`${action} feature coming soon! Stay tuned for updates.`, 'info');
+                    });
+                }
+            }
+        });
+
+        // Add New Content functionality
+        let addedContent = [];
+        
+        document.getElementById('add-new-content').addEventListener('click', function() {
+            const contentType = document.getElementById('new-content-type').value;
+            const title = document.getElementById('new-content-title').value;
+            const description = document.getElementById('new-content-description').value;
+            const link = document.getElementById('new-content-link').value;
+            
+            if (!contentType || !title || !description) {
+                showNotification('Please fill in all required fields!', 'error');
+                return;
+            }
+            
+            const newContent = {
+                id: Date.now(),
+                type: contentType,
+                title: title,
+                description: description,
+                link: link,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            addedContent.push(newContent);
+            updateAddedContentList();
+            
+            // Show notification banner if it's an announcement
+            if (contentType === 'announcement') {
+                showNotificationBanner(title + ': ' + description);
+            }
+            
+            // Clear form
+            document.getElementById('new-content-type').value = '';
+            document.getElementById('new-content-title').value = '';
+            document.getElementById('new-content-description').value = '';
+            document.getElementById('new-content-link').value = '';
+            
+            showNotification('New content added successfully!', 'success');
+        });
+        
+        function updateAddedContentList() {
+            const listContainer = document.getElementById('added-content-list');
+            listContainer.innerHTML = '';
+            
+            if (addedContent.length === 0) {
+                listContainer.innerHTML = '<p class="text-gray-500 text-sm">No content added yet.</p>';
+                return;
+            }
+            
+            addedContent.forEach(content => {
+                const contentItem = document.createElement('div');
+                contentItem.className = 'bg-gray-50 p-3 rounded-lg border';
+                contentItem.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-800">${content.type}</span>
+                                <span class="text-xs text-gray-500">${content.timestamp}</span>
+                            </div>
+                            <h5 class="font-medium text-gray-900 text-sm">${content.title}</h5>
+                            <p class="text-xs text-gray-600 mt-1">${content.description}</p>
+                            ${content.link ? `<a href="${content.link}" target="_blank" class="text-xs text-blue-600 hover:underline">View Link</a>` : ''}
+                        </div>
+                        <button onclick="removeContent(${content.id})" class="text-red-500 hover:text-red-700 ml-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                listContainer.appendChild(contentItem);
+            });
+        }
+        
+        function removeContent(contentId) {
+            addedContent = addedContent.filter(content => content.id !== contentId);
+            updateAddedContentList();
+            showNotification('Content removed successfully!', 'success');
+        }
+        
+        function showNotificationBanner(message) {
+            const banner = document.getElementById('admin-notification-banner');
+            const text = document.getElementById('notification-text');
+            const nav = document.getElementById('main-nav');
+            
+            text.textContent = message;
+            banner.classList.remove('hidden');
+            nav.style.top = '40px'; // Adjust nav position
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                hideNotificationBanner();
+            }, 10000);
+        }
+        
+        function hideNotificationBanner() {
+            const banner = document.getElementById('admin-notification-banner');
+            const nav = document.getElementById('main-nav');
+            
+            banner.classList.add('hidden');
+            nav.style.top = '0px';
+        }
+        
+        // Close notification banner
+        document.getElementById('close-notification').addEventListener('click', hideNotificationBanner);
+        
+        // Make removeContent function global
+        window.removeContent = removeContent;
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm transform transition-all duration-300 translate-x-full`;
+            
+            const colors = {
+                success: 'bg-green-500 text-white',
+                error: 'bg-red-500 text-white',
+                info: 'bg-blue-500 text-white'
+            };
+            
+            notification.className += ` ${colors[type]}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize Data SDK on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDataSdk();
+            renderQuiz();
+            displayYouTubeVideo();
+        });
+
+        // Initialize Element SDK
+        async function onConfigChange(config) {
+            // Update text content
+            const mainTagline = document.getElementById('main-tagline');
+            if (mainTagline) mainTagline.textContent = config.main_tagline || defaultConfig.main_tagline;
+            
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            if (heroSubtitle) heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            
+            const aboutTitle = document.getElementById('about-title');
+            if (aboutTitle) aboutTitle.textContent = config.about_title || defaultConfig.about_title;
+            
+            const aboutDescription = document.getElementById('about-description');
+            if (aboutDescription) aboutDescription.textContent = config.about_description || defaultConfig.about_description;
+            
+            const examPrepTitle = document.getElementById('exam-prep-title');
+            if (examPrepTitle) examPrepTitle.textContent = config.exam_prep_title || defaultConfig.exam_prep_title;
+            
+            const contactTitle = document.getElementById('contact-title');
+            if (contactTitle) contactTitle.textContent = config.contact_title || defaultConfig.contact_title;
+
+            // Update colors
+            const primaryColor = config.primary_color || defaultConfig.primary_color;
+            const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const accentColor = config.accent_color || defaultConfig.accent_color;
+
+            // Apply background color
+            document.body.style.backgroundColor = backgroundColor;
+            
+            // Apply text color
+            document.querySelectorAll('h1, h2, h3, p, span').forEach(el => {
+                if (!el.classList.contains('text-white') && !el.style.color) {
+                    el.style.color = textColor;
+                }
+            });
+
+            // Apply primary color to buttons and elements
+            document.querySelectorAll('.btn-primary, .bg-blue-500').forEach(el => {
+                el.style.backgroundColor = primaryColor;
+            });
+
+            // Apply secondary color to green elements
+            document.querySelectorAll('.bg-green-500').forEach(el => {
+                el.style.backgroundColor = secondaryColor;
+            });
+
+            // Apply accent color to purple elements
+            document.querySelectorAll('.bg-purple-500').forEach(el => {
+                el.style.backgroundColor = accentColor;
+            });
+
+            // Update font
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseFontStack = 'system-ui, -apple-system, sans-serif';
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+            // Update font sizes
+            const baseSize = config.font_size || defaultConfig.font_size;
+            document.documentElement.style.fontSize = `${baseSize}px`;
+            
+            // Scale headings proportionally
+            document.querySelectorAll('h1').forEach(el => {
+                el.style.fontSize = `${baseSize * 3}px`;
+            });
+            document.querySelectorAll('h2').forEach(el => {
+                el.style.fontSize = `${baseSize * 2.25}px`;
+            });
+            document.querySelectorAll('h3').forEach(el => {
+                el.style.fontSize = `${baseSize * 1.5}px`;
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.primary_color || defaultConfig.primary_color,
+                        set: (value) => {
+                            config.primary_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => {
+                            config.secondary_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.accent_color || defaultConfig.accent_color,
+                        set: (value) => {
+                            config.accent_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ accent_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        config.font_family = value;
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        config.font_size = value;
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["main_tagline", config.main_tagline || defaultConfig.main_tagline],
+                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                ["about_title", config.about_title || defaultConfig.about_title],
+                ["about_description", config.about_description || defaultConfig.about_description],
+                ["exam_prep_title", config.exam_prep_title || defaultConfig.exam_prep_title],
+                ["contact_title", config.contact_title || defaultConfig.contact_title]
+            ]);
+        }
+
+        // Initialize SDK when available
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ad8289c1da0645',t:'MTc2MjUyNTYzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
