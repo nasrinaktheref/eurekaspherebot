@@ -549,7 +549,7 @@
        </svg>
       </div>
       <h3 class="text-lg font-bold text-gray-900 mb-2">Quick Quiz</h3>
-      <p class="text-gray-600 text-sm mb-4">15 minutes • 20 questions</p><button class="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors">Start Quiz</button>
+      <p class="text-gray-600 text-sm mb-4">15 minutes • 20 questions</p><button class="practice-test-btn w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors" data-test-type="quick">Start Quiz</button>
      </div>
      <div class="card-hover bg-white p-6 rounded-xl shadow-lg text-center">
       <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -557,7 +557,7 @@
        </svg>
       </div>
       <h3 class="text-lg font-bold text-gray-900 mb-2">Mock Test</h3>
-      <p class="text-gray-600 text-sm mb-4">3 hours • 100 questions</p><button class="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition-colors">Start Test</button>
+      <p class="text-gray-600 text-sm mb-4">3 hours • 100 questions</p><button class="practice-test-btn w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition-colors" data-test-type="mock">Start Test</button>
      </div>
      <div class="card-hover bg-white p-6 rounded-xl shadow-lg text-center">
       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -565,7 +565,7 @@
        </svg>
       </div>
       <h3 class="text-lg font-bold text-gray-900 mb-2">Speed Test</h3>
-      <p class="text-gray-600 text-sm mb-4">5 minutes • 10 questions</p><button class="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors">Start Test</button>
+      <p class="text-gray-600 text-sm mb-4">5 minutes • 10 questions</p><button class="practice-test-btn w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:bg-purple-600 transition-colors" data-test-type="speed">Start Test</button>
      </div>
      <div class="card-hover bg-white p-6 rounded-xl shadow-lg text-center">
       <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -573,7 +573,7 @@
        </svg>
       </div>
       <h3 class="text-lg font-bold text-gray-900 mb-2">Subject Test</h3>
-      <p class="text-gray-600 text-sm mb-4">1 hour • 50 questions</p><button class="w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">Start Test</button>
+      <p class="text-gray-600 text-sm mb-4">1 hour • 50 questions</p><button class="practice-test-btn w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors" data-test-type="subject">Start Test</button>
      </div>
     </div><!-- Live Quiz Section -->
     <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border-2 border-purple-200">
@@ -581,7 +581,7 @@
       <div class="inline-flex items-center bg-red-500 text-white px-4 py-2 rounded-full mb-4 animate-pulse"><span class="w-3 h-3 bg-white rounded-full mr-2 animate-ping"></span> LIVE QUIZ
       </div>
       <h3 class="text-3xl font-bold text-gray-900 mb-2">🎯 Test Your Knowledge Now!</h3>
-      <p class="text-gray-600">Answer these questions and see how you score</p>
+      <p class="text-gray-600">Answer all 10 questions and see how you score</p>
      </div>
      <div id="quiz-container" class="space-y-6"><!-- Quiz questions will be dynamically loaded here -->
      </div>
@@ -591,7 +591,7 @@
         🎉
        </div>
        <h4 class="text-2xl font-bold text-gray-900 mb-2">Quiz Completed!</h4>
-       <p class="text-xl text-gray-600 mb-4">Your Score: <span id="quiz-score" class="font-bold text-blue-600">0/3</span></p>
+       <p class="text-xl text-gray-600 mb-4">Your Score: <span id="quiz-score" class="font-bold text-blue-600">0/10</span></p>
        <p id="quiz-message" class="text-gray-600 mb-6"></p><button id="retake-quiz" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all">Retake Quiz</button>
       </div>
      </div>
@@ -1120,7 +1120,7 @@
             link: ''
         };
 
-        // Quiz state
+        // Quiz state - Now with 10 questions!
         let quizData = {
             quiz1: {
                 question: 'What is the chemical symbol for water?',
@@ -1144,6 +1144,62 @@
                 optionB: 'Ribosome',
                 optionC: 'Mitochondria',
                 optionD: 'Chloroplast',
+                answer: 'C'
+            },
+            quiz4: {
+                question: 'Who wrote the famous play "Romeo and Juliet"?',
+                optionA: 'Charles Dickens',
+                optionB: 'William Shakespeare',
+                optionC: 'Jane Austen',
+                optionD: 'Mark Twain',
+                answer: 'B'
+            },
+            quiz5: {
+                question: 'What is the capital of France?',
+                optionA: 'London',
+                optionB: 'Berlin',
+                optionC: 'Paris',
+                optionD: 'Madrid',
+                answer: 'C'
+            },
+            quiz6: {
+                question: 'What is 25% of 80?',
+                optionA: '15',
+                optionB: '20',
+                optionC: '25',
+                optionD: '30',
+                answer: 'B'
+            },
+            quiz7: {
+                question: 'Which gas do plants absorb from the atmosphere?',
+                optionA: 'Oxygen',
+                optionB: 'Nitrogen',
+                optionC: 'Carbon Dioxide',
+                optionD: 'Hydrogen',
+                answer: 'C'
+            },
+            quiz8: {
+                question: 'What is the largest continent in the world?',
+                optionA: 'Africa',
+                optionB: 'Asia',
+                optionC: 'Europe',
+                optionD: 'North America',
+                answer: 'B'
+            },
+            quiz9: {
+                question: 'Who invented the light bulb?',
+                optionA: 'Nikola Tesla',
+                optionB: 'Thomas Edison',
+                optionC: 'Alexander Graham Bell',
+                optionD: 'Albert Einstein',
+                answer: 'B'
+            },
+            quiz10: {
+                question: 'What is the square root of 64?',
+                optionA: '6',
+                optionB: '7',
+                optionC: '8',
+                optionD: '9',
                 answer: 'C'
             }
         };
@@ -1629,28 +1685,34 @@
 
         // Load quiz data to admin panel
         function loadQuizDataToAdmin() {
-            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
+            ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7', 'quiz8', 'quiz9', 'quiz10'].forEach(quizId => {
                 const quiz = quizData[quizId];
-                document.getElementById(`${quizId}-question`).value = quiz.question || '';
-                document.getElementById(`${quizId}-optionA`).value = quiz.optionA || '';
-                document.getElementById(`${quizId}-optionB`).value = quiz.optionB || '';
-                document.getElementById(`${quizId}-optionC`).value = quiz.optionC || '';
-                document.getElementById(`${quizId}-optionD`).value = quiz.optionD || '';
-                document.getElementById(`${quizId}-answer`).value = quiz.answer || '';
+                const questionInput = document.getElementById(`${quizId}-question`);
+                if (questionInput) {
+                    questionInput.value = quiz.question || '';
+                    document.getElementById(`${quizId}-optionA`).value = quiz.optionA || '';
+                    document.getElementById(`${quizId}-optionB`).value = quiz.optionB || '';
+                    document.getElementById(`${quizId}-optionC`).value = quiz.optionC || '';
+                    document.getElementById(`${quizId}-optionD`).value = quiz.optionD || '';
+                    document.getElementById(`${quizId}-answer`).value = quiz.answer || '';
+                }
             });
         }
 
         // Save quiz data
         document.getElementById('save-quizzes').addEventListener('click', function() {
-            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
-                quizData[quizId] = {
-                    question: document.getElementById(`${quizId}-question`).value,
-                    optionA: document.getElementById(`${quizId}-optionA`).value,
-                    optionB: document.getElementById(`${quizId}-optionB`).value,
-                    optionC: document.getElementById(`${quizId}-optionC`).value,
-                    optionD: document.getElementById(`${quizId}-optionD`).value,
-                    answer: document.getElementById(`${quizId}-answer`).value
-                };
+            ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7', 'quiz8', 'quiz9', 'quiz10'].forEach(quizId => {
+                const questionInput = document.getElementById(`${quizId}-question`);
+                if (questionInput) {
+                    quizData[quizId] = {
+                        question: questionInput.value,
+                        optionA: document.getElementById(`${quizId}-optionA`).value,
+                        optionB: document.getElementById(`${quizId}-optionB`).value,
+                        optionC: document.getElementById(`${quizId}-optionC`).value,
+                        optionD: document.getElementById(`${quizId}-optionD`).value,
+                        answer: document.getElementById(`${quizId}-answer`).value
+                    };
+                }
             });
             
             renderQuiz();
@@ -1665,7 +1727,8 @@
             
             let hasQuestions = false;
             
-            ['quiz1', 'quiz2', 'quiz3'].forEach((quizId, index) => {
+            // Loop through all quiz questions (quiz1 to quiz10)
+            ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7', 'quiz8', 'quiz9', 'quiz10'].forEach((quizId, index) => {
                 const quiz = quizData[quizId];
                 
                 if (quiz.question && quiz.optionA && quiz.optionB && quiz.optionC && quiz.optionD && quiz.answer) {
@@ -1712,7 +1775,8 @@
             userAnswers = {};
             let allAnswered = true;
             
-            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
+            // Check all 10 quiz questions
+            ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7', 'quiz8', 'quiz9', 'quiz10'].forEach(quizId => {
                 const quiz = quizData[quizId];
                 if (quiz.question) {
                     const selected = document.querySelector(`input[name="${quizId}"]:checked`);
@@ -1733,7 +1797,7 @@
             let score = 0;
             let totalQuestions = 0;
             
-            ['quiz1', 'quiz2', 'quiz3'].forEach(quizId => {
+            ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6', 'quiz7', 'quiz8', 'quiz9', 'quiz10'].forEach(quizId => {
                 const quiz = quizData[quizId];
                 if (quiz.question) {
                     totalQuestions++;
@@ -1754,9 +1818,11 @@
             
             if (percentage === 100) {
                 message = '🌟 Perfect score! You\'re a genius!';
-            } else if (percentage >= 66) {
+            } else if (percentage >= 80) {
+                message = '🎉 Excellent! Outstanding performance!';
+            } else if (percentage >= 60) {
                 message = '👏 Great job! Keep up the good work!';
-            } else if (percentage >= 33) {
+            } else if (percentage >= 40) {
                 message = '💪 Good effort! Practice more to improve!';
             } else {
                 message = '📚 Keep learning! You\'ll do better next time!';
@@ -2068,10 +2134,204 @@
             }
         });
 
+        // Practice test questions data
+        const practiceTestQuestions = {
+            quick: [
+                { question: 'What is 5 + 7?', optionA: '10', optionB: '11', optionC: '12', optionD: '13', answer: 'C' },
+                { question: 'Which is the largest planet?', optionA: 'Earth', optionB: 'Mars', optionC: 'Jupiter', optionD: 'Saturn', answer: 'C' },
+                { question: 'What is the capital of USA?', optionA: 'New York', optionB: 'Washington DC', optionC: 'Los Angeles', optionD: 'Chicago', answer: 'B' },
+                { question: 'How many continents are there?', optionA: '5', optionB: '6', optionC: '7', optionD: '8', answer: 'C' },
+                { question: 'What is 10 × 10?', optionA: '100', optionB: '110', optionC: '90', optionD: '120', answer: 'A' },
+                { question: 'Which gas do we breathe?', optionA: 'Nitrogen', optionB: 'Oxygen', optionC: 'Carbon Dioxide', optionD: 'Hydrogen', answer: 'B' },
+                { question: 'What is the boiling point of water?', optionA: '90°C', optionB: '100°C', optionC: '110°C', optionD: '120°C', answer: 'B' },
+                { question: 'How many days in a week?', optionA: '5', optionB: '6', optionC: '7', optionD: '8', answer: 'C' },
+                { question: 'What is 15 - 8?', optionA: '6', optionB: '7', optionC: '8', optionD: '9', answer: 'B' },
+                { question: 'Which is the smallest prime number?', optionA: '0', optionB: '1', optionC: '2', optionD: '3', answer: 'C' }
+            ],
+            mock: [
+                { question: 'What is photosynthesis?', optionA: 'Plant respiration', optionB: 'Plant food making', optionC: 'Plant growth', optionD: 'Plant reproduction', answer: 'B' },
+                { question: 'Who discovered gravity?', optionA: 'Einstein', optionB: 'Newton', optionC: 'Galileo', optionD: 'Tesla', answer: 'B' },
+                { question: 'What is the speed of light?', optionA: '300,000 km/s', optionB: '200,000 km/s', optionC: '400,000 km/s', optionD: '500,000 km/s', answer: 'A' },
+                { question: 'Which organ pumps blood?', optionA: 'Liver', optionB: 'Kidney', optionC: 'Heart', optionD: 'Lungs', answer: 'C' },
+                { question: 'What is H2O?', optionA: 'Oxygen', optionB: 'Hydrogen', optionC: 'Water', optionD: 'Carbon', answer: 'C' },
+                { question: 'How many bones in human body?', optionA: '206', optionB: '205', optionC: '207', optionD: '208', answer: 'A' },
+                { question: 'What is the largest ocean?', optionA: 'Atlantic', optionB: 'Indian', optionC: 'Pacific', optionD: 'Arctic', answer: 'C' },
+                { question: 'Who wrote Hamlet?', optionA: 'Dickens', optionB: 'Shakespeare', optionC: 'Austen', optionD: 'Twain', answer: 'B' },
+                { question: 'What is 12²?', optionA: '144', optionB: '124', optionC: '164', optionD: '134', answer: 'A' },
+                { question: 'Which planet is closest to Sun?', optionA: 'Venus', optionB: 'Earth', optionC: 'Mercury', optionD: 'Mars', answer: 'C' }
+            ],
+            speed: [
+                { question: '2 + 2 = ?', optionA: '3', optionB: '4', optionC: '5', optionD: '6', answer: 'B' },
+                { question: '10 ÷ 2 = ?', optionA: '4', optionB: '5', optionC: '6', optionD: '7', answer: 'B' },
+                { question: '3 × 3 = ?', optionA: '6', optionB: '7', optionC: '8', optionD: '9', answer: 'D' },
+                { question: '20 - 5 = ?', optionA: '13', optionB: '14', optionC: '15', optionD: '16', answer: 'C' },
+                { question: '8 + 7 = ?', optionA: '14', optionB: '15', optionC: '16', optionD: '17', answer: 'B' },
+                { question: '50 ÷ 5 = ?', optionA: '8', optionB: '9', optionC: '10', optionD: '11', answer: 'C' },
+                { question: '6 × 4 = ?', optionA: '22', optionB: '23', optionC: '24', optionD: '25', answer: 'C' },
+                { question: '100 - 25 = ?', optionA: '73', optionB: '74', optionC: '75', optionD: '76', answer: 'C' },
+                { question: '9 + 6 = ?', optionA: '13', optionB: '14', optionC: '15', optionD: '16', answer: 'C' },
+                { question: '7 × 7 = ?', optionA: '47', optionB: '48', optionC: '49', optionD: '50', answer: 'C' }
+            ],
+            subject: [
+                { question: 'What is the formula for area of circle?', optionA: 'πr', optionB: 'πr²', optionC: '2πr', optionD: 'πd', answer: 'B' },
+                { question: 'What is Newton\'s first law?', optionA: 'F=ma', optionB: 'Law of inertia', optionC: 'Action-reaction', optionD: 'Gravity', answer: 'B' },
+                { question: 'What is the atomic number of Carbon?', optionA: '4', optionB: '5', optionC: '6', optionD: '7', answer: 'C' },
+                { question: 'Who painted Mona Lisa?', optionA: 'Picasso', optionB: 'Da Vinci', optionC: 'Van Gogh', optionD: 'Monet', answer: 'B' },
+                { question: 'What is the Pythagorean theorem?', optionA: 'a+b=c', optionB: 'a²+b²=c²', optionC: 'a×b=c', optionD: 'a-b=c', answer: 'B' },
+                { question: 'What is DNA?', optionA: 'Protein', optionB: 'Carbohydrate', optionC: 'Genetic material', optionD: 'Enzyme', answer: 'C' },
+                { question: 'What is the capital of Japan?', optionA: 'Beijing', optionB: 'Seoul', optionC: 'Tokyo', optionD: 'Bangkok', answer: 'C' },
+                { question: 'What is evaporation?', optionA: 'Liquid to gas', optionB: 'Gas to liquid', optionC: 'Solid to liquid', optionD: 'Liquid to solid', answer: 'A' },
+                { question: 'Who invented the telephone?', optionA: 'Edison', optionB: 'Bell', optionC: 'Tesla', optionD: 'Marconi', answer: 'B' },
+                { question: 'What is the smallest unit of life?', optionA: 'Atom', optionB: 'Molecule', optionC: 'Cell', optionD: 'Tissue', answer: 'C' }
+            ]
+        };
+
+        // Show practice test modal
+        function showPracticeTest(testType) {
+            const questions = practiceTestQuestions[testType];
+            if (!questions || questions.length === 0) {
+                showNotification('No questions available for this test yet.', 'info');
+                return;
+            }
+
+            const testTitles = {
+                quick: 'Quick Quiz - 20 Questions',
+                mock: 'Mock Test - 100 Questions',
+                speed: 'Speed Test - 10 Questions',
+                subject: 'Subject Test - 50 Questions'
+            };
+
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
+            modal.innerHTML = `
+                <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-gray-900">${testTitles[testType]}</h3>
+                        <button class="close-test-modal text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-6 space-y-6" id="test-questions-container"></div>
+                    <div class="sticky bottom-0 bg-white border-t p-6">
+                        <button class="submit-test-btn w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-600 transition-all">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Render questions
+            const container = modal.querySelector('#test-questions-container');
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'bg-gray-50 rounded-xl p-6 border-2 border-gray-200';
+                questionDiv.innerHTML = `
+                    <h4 class="text-lg font-bold text-gray-900 mb-4">Question ${index + 1}</h4>
+                    <p class="text-gray-700 mb-4 text-lg">${q.question}</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="test-q${index}" value="A" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>A.</strong> ${q.optionA}</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="test-q${index}" value="B" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>B.</strong> ${q.optionB}</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="test-q${index}" value="C" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>C.</strong> ${q.optionC}</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                            <input type="radio" name="test-q${index}" value="D" class="w-5 h-5 text-blue-600 mr-3">
+                            <span class="text-gray-700"><strong>D.</strong> ${q.optionD}</span>
+                        </label>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+
+            // Close modal handler
+            modal.querySelector('.close-test-modal').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+
+            // Submit handler
+            modal.querySelector('.submit-test-btn').addEventListener('click', () => {
+                let score = 0;
+                let answered = 0;
+
+                questions.forEach((q, index) => {
+                    const selected = modal.querySelector(`input[name="test-q${index}"]:checked`);
+                    if (selected) {
+                        answered++;
+                        if (selected.value === q.answer) {
+                            score++;
+                        }
+                    }
+                });
+
+                if (answered < questions.length) {
+                    showNotification('Please answer all questions before submitting!', 'error');
+                    return;
+                }
+
+                const percentage = (score / questions.length) * 100;
+                let message = '';
+                
+                if (percentage === 100) {
+                    message = '🌟 Perfect score! Outstanding performance!';
+                } else if (percentage >= 80) {
+                    message = '🎉 Excellent! You\'re doing great!';
+                } else if (percentage >= 60) {
+                    message = '👏 Good job! Keep practicing!';
+                } else if (percentage >= 40) {
+                    message = '💪 Fair attempt! Study more to improve!';
+                } else {
+                    message = '📚 Keep learning! Practice makes perfect!';
+                }
+
+                // Show result
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h4 class="text-3xl font-bold text-gray-900 mb-4">Test Completed!</h4>
+                        <p class="text-2xl text-gray-600 mb-4">Your Score: <span class="font-bold text-blue-600">${score}/${questions.length}</span></p>
+                        <p class="text-xl text-gray-600 mb-6">${message}</p>
+                        <p class="text-lg text-gray-500">Percentage: ${percentage.toFixed(1)}%</p>
+                    </div>
+                `;
+
+                modal.querySelector('.submit-test-btn').textContent = 'Close';
+                modal.querySelector('.submit-test-btn').onclick = () => {
+                    document.body.removeChild(modal);
+                };
+            });
+
+            // Close on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
+        // Practice test button handlers
+        document.querySelectorAll('.practice-test-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const testType = this.getAttribute('data-test-type');
+                showPracticeTest(testType);
+            });
+        });
+
         // Button click handlers
         document.querySelectorAll('button').forEach(button => {
             if (button.textContent.includes('Start') || button.textContent.includes('Access') || button.textContent.includes('Browse') || button.textContent.includes('View')) {
-                if (!button.classList.contains('exam-btn') && !button.classList.contains('math-olympiad-btn')) {
+                if (!button.classList.contains('exam-btn') && !button.classList.contains('math-olympiad-btn') && !button.classList.contains('practice-test-btn')) {
                     button.addEventListener('click', function() {
                         const action = this.textContent;
                         showNotification(`${action} feature coming soon! Stay tuned for updates.`, 'info');
@@ -2392,5 +2652,5 @@
             });
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99adab4ad6f30645',t:'MTc2MjUyNzMwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99adb591d2d30645',t:'MTc2MjUyNzcyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
